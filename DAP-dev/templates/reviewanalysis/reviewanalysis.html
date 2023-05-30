@@ -1,0 +1,184 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load file_exists %}
+{% block title%}{{pageInfo.title}}{% endblock title %}
+{% block extra_css %}{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mt-n4 mx-n4 g-mt-tab_menu-foreground">
+              <div class="bg-soft-warning">
+                <div class="card-body pb-0 px-4">
+                  <div class="row mb-3">
+                    <div class="col-md">
+                      <div class="row align-items-center g-3">
+                        <div class="col-md-auto">
+                          <div class="avatar-md">
+                            <div class="avatar-title bg-white rounded-circle">
+                              <img src="{% static 'images/brands/reviewanalysis.png'%}" alt="" class="avatar-xs">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div>
+                            <h4 class="fw-bold">리뷰분석 - {{pageInfo.title}}</h4>
+                            <div class="hstack gap-3 flex-wrap">
+                              <div>
+                                <i class="bx bxs-edit-alt align-middle"></i>
+                                리뷰분석</div>
+                              <div class="vr"></div>
+                              <div>기준일 :
+                                <span class="fw-medium">{{initData.base_dt}}</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul id="tmallglobal-tablist" class="nav nav-tabs-custom border-bottom-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body active fw-semibold" data-bs-toggle="tab" href="#overviewTab" role="tab" aria-selected="true">
+                        Overview
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#deepdiveTab" role="tab" aria-selected="flase" tabindex="-1">
+                        Topic별 Deep dive
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#reviewTab" role="tab" aria-selected="flase" tabindex="-1">
+                        Review
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation" style="display: none;">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#otherTab" role="tab" aria-selected="flase" tabindex="-1">
+                        기타
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end card body -->
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="tab-content text-muted">
+              <div class="tab-pane fade show active" id="overviewTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/overview.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/overview.html" %}
+                {% else %}
+                  {% include "reviewanalysis/common/tabs/overview.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="deepdiveTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/deepdive.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/deepdive.html" %}
+                {% else %}
+                  {% include "reviewanalysis/common/tabs/deepdive.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="reviewTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/review.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/review.html" %}
+                {% else %}
+                  {% include "reviewanalysis/common/tabs/review.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="otherTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/other.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/other.html" %}
+                {% else %}
+                  {% include "reviewanalysis/common/tabs/other.html" %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+
+        <!-- container-fluid -->
+      </div>
+      <!-- End Page-content -->
+    </div>
+    <!-- end main content-->
+  </div>
+  <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+    {% if 'js/'|add:pageInfo.basePath|add:'/tabs/overview.js'|static_file_exists %}
+        <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/overview.js' %}"></script>
+    {% else %}
+        <script src="{% static 'js/reviewanalysis/common/tabs/overview.js' %}"></script>
+    {% endif %}
+    {% if 'js/'|add:pageInfo.basePath|add:'/tabs/deepdive.js'|static_file_exists %}
+        <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/deepdive.js' %}"></script>
+    {% else %}
+        <script src="{% static 'js/reviewanalysis/common/tabs/deepdive.js' %}"></script>
+    {% endif %}
+    {% if 'js/'|add:pageInfo.basePath|add:'/tabs/review.js'|static_file_exists %}
+        <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/review.js' %}"></script>
+    {% else %}
+        <script src="{% static 'js/reviewanalysis/common/tabs/review.js' %}"></script>
+    {% endif %}
+    {% if 'js/'|add:pageInfo.basePath|add:'/tabs/other.js'|static_file_exists %}
+        <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/other.js' %}"></script>
+    {% else %}
+        <script src="{% static 'js/reviewanalysis/common/tabs/other.js' %}"></script>
+    {% endif %}
+
+  <script>
+    window.onload = function () {
+      setTimeout(function () {
+        window.scrollTo(0, 0);
+        // 매출 탭 이벤트 적용
+        let initData = "{{initData|safe}}";
+        let jsonData = JSON.parse(initData.replace(/'/g, "\""));
+
+        reviewAnalysisOverview.onLoadEvent(jsonData);
+
+        const ul = document.querySelector('#tmallglobal-tablist');
+        const tabList = ul.querySelectorAll('[role="tab"]');
+        tabList.forEach(function (tab) {
+          const href = tab.getAttribute("href");
+
+          tab.addEventListener('click', function (e) {
+            if (href.includes("overviewTab")) {
+              if (!reviewAnalysisOverview.onloadStatus) {
+                reviewAnalysisOverview.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("deepdiveTab")) {
+              if (!reviewAnalysisDeepdive.onloadStatus) {
+                reviewAnalysisDeepdive.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("reviewTab")) {
+              if (!reviewAnalysisReview.onloadStatus) {
+                reviewAnalysisReview.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("otherTab")) {
+              if (!reviewAnalysisOther.onloadStatus) {
+                reviewAnalysisOther.onLoadEvent(jsonData);
+              }
+            }
+          });
+        });
+      }, 100);
+    };
+    //////////////////////////////////
+
+    //////////////////////////////////
+  </script>
+{% endblock extra_js %}

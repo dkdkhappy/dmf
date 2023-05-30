@@ -1,0 +1,62 @@
+/* 5. 요일별 첫방문 구매자 비중 - 하단표 SQL */
+WITH WT_WHERE AS
+    (
+        SELECT FRST_DT_YEAR             AS FR_DT      /* 기준일의  1월  1일       */
+              ,BASE_YEAR    ||'-12-31'  AS TO_DT      /* 기준일의 12월 31일       */
+          FROM DASH.DASH_INITIAL_DATE
+    ), WT_COPY AS
+    (
+        SELECT 1        AS SORT_KEY
+              ,'방문자 중 첫 방문자 비중' AS ROW_TITL
+     UNION ALL
+        SELECT 2        AS SORT_KEY
+              ,'방문자 중 구매자 비중' AS ROW_TITL
+    ), WT_CAST AS
+    (
+        SELECT STATISTICS_DATE
+              ,NUMBER_OF_VISITORS    AS VIST_CNT  /* 방문자수   */
+              ,NEW_VISITORS          AS FRST_CNT  /* 첫방문자수 */
+              ,NUMBER_OF_PAID_BUYERS AS PAID_CNT  /* 구매자수   */
+          FROM DASH_RAW.OVER_{TAG}_OVERALL_STORE A
+         WHERE STATISTICS_DATE BETWEEN (SELECT FR_DT FROM WT_WHERE) AND (SELECT TO_DT FROM WT_WHERE)
+    ), WT_SUM AS
+    (
+        SELECT TO_CHAR(CAST(STATISTICS_DATE AS DATE), 'Dy') AS WEEK_ID
+              ,SUM(VIST_CNT)                                AS VIST_CNT  /* 방문자수   */
+              ,SUM(FRST_CNT)                                AS FRST_CNT  /* 첫방문자수 */
+              ,SUM(PAID_CNT)                                AS PAID_CNT  /* 구매자수   */
+          FROM WT_CAST A
+      GROUP BY TO_CHAR(CAST(STATISTICS_DATE AS DATE), 'Dy')
+    ), WT_RATE AS
+    (
+        SELECT WEEK_ID        /* 요일     */
+              ,VIST_CNT       /* 방문자수 */
+              ,CASE WHEN COALESCE(VIST_CNT, 0) = 0 THEN 0 ELSE FRST_CNT / VIST_CNT * 100 END AS FRST_RATE  /* 첫 방문자 비율 */
+              ,CASE WHEN COALESCE(VIST_CNT, 0) = 0 THEN 0 ELSE PAID_CNT / VIST_CNT * 100 END AS PAID_RATE  /* 구매자    비율 */
+          FROM WT_SUM A
+    ), WT_BASE AS
+    (
+        SELECT SORT_KEY
+              ,ROW_TITL
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Mon' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Mon' THEN PAID_RATE  END) AS COL_VAL_MON
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Tue' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Tue' THEN PAID_RATE  END) AS COL_VAL_TUE
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Wed' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Wed' THEN PAID_RATE  END) AS COL_VAL_WED
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Thu' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Thu' THEN PAID_RATE  END) AS COL_VAL_THU
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Fri' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Fri' THEN PAID_RATE  END) AS COL_VAL_FRI
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Sat' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Sat' THEN PAID_RATE  END) AS COL_VAL_SAT
+              ,SUM(CASE WHEN SORT_KEY = 1 AND WEEK_ID = 'Sun' THEN FRST_RATE WHEN SORT_KEY = 2 AND WEEK_ID = 'Sun' THEN PAID_RATE  END) AS COL_VAL_SUN
+          FROM WT_COPY A 
+              ,WT_RATE B
+      GROUP BY SORT_KEY
+              ,ROW_TITL
+    )
+    SELECT ROW_TITL
+          ,TO_CHAR(CAST(COL_VAL_MON AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_MON
+          ,TO_CHAR(CAST(COL_VAL_TUE AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_TUE
+          ,TO_CHAR(CAST(COL_VAL_WED AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_WED
+          ,TO_CHAR(CAST(COL_VAL_THU AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_THU
+          ,TO_CHAR(CAST(COL_VAL_FRI AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_FRI
+          ,TO_CHAR(CAST(COL_VAL_SAT AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_SAT
+          ,TO_CHAR(CAST(COL_VAL_SUN AS DECIMAL(20,2)), 'FM999,999,999,999,990.99%') AS COL_VAL_SUN
+      FROM WT_BASE
+  ORDER BY SORT_KEY

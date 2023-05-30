@@ -1,0 +1,214 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title%}Summary{% endblock title %}
+{% block extra_css %}
+  <style>
+    .currency-exchange {
+      margin-right: 5px;
+    }
+
+    .currency-exchange.cny:before {
+      content: "¥";
+    }
+
+    .currency-exchange.krw:before {
+      content: "";
+    }
+  </style>
+  <!-- jsvectormap css -->
+  <!-- <link href="{% static 'libs/jsvectormap/dist/css/jsvectormap.min.css'%}" rel="stylesheet" type="text/css"/> -->
+  <!--Swiper slider css-->
+  <!-- <link href="{% static 'libs/swiper/swiper-bundle.min.css'%}" rel="stylesheet" type="text/css"/> -->
+{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mt-n4 mx-n4">
+              <div class="bg-soft-warning">
+                <div class="card-body pb-0 px-4">
+                  <div class="row mb-3">
+                    <div class="col-md">
+                      <div class="row align-items-center g-3">
+                        <div class="col-md-auto">
+                          <div class="avatar-md">
+                            <div class="avatar-title bg-white rounded-circle">
+                              <img src="{% static 'images/brands/dashboard.png'%}" alt="" class="avatar-xs">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div>
+                            <h4 class="fw-bold">중국 매출 대시보드 - Summary</h4>
+                            <div class="hstack gap-3 flex-wrap">
+                              <div>
+                                <i class="bx bxs-dashboard align-middle"></i>
+                                중국 매출 대시보드</div>
+                              <div class="vr"></div>
+                              <div>기준일 :
+                                <span class="fw-medium" id="x_dt">{{initData.base_dt}}</span></div>
+                              <div id="d_vr" class="vr"></div>
+                              <div id="d_dropdown" class="dropdown">
+                                <button type="button" class="btn btn-ghost-secondary d-flex align-items-center" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img id="selected-currency-img" data-currency="cny" src="{% static 'images/flags/cn.svg'%}" alt="Header Language" height="20" class="me-2 rounded">
+                                  <p id="selected-currency-title" class="mb-0" style="height: 16px;">RMB중국위안화</p>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2 currency-img" title="China" data-title="RMB중국위안화" data-img="{% static 'images/flags/cn.svg'%}" data-currency="cny">
+                                    <img src="{% static 'images/flags/cn.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">RMB중국위안화</span>
+                                  </a>
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item currency-img" title="Korea" data-title="KRW한국원화" data-img="{% static 'images/flags/kr.svg'%}" data-currency="krw">
+                                    <img src="{% static 'images/flags/kr.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">KRW한국원화</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul id="summary-tablist" class="nav nav-tabs-custom border-bottom-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body active fw-semibold" data-bs-toggle="tab" href="#sale2Tab" role="tab" aria-selected="true">
+                        매출
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#channel2Tab" role="tab" aria-selected="false" tabindex="-1">
+                        채널 수익
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#customer2Tab" role="tab" aria-selected="false" tabindex="-1">
+                        고객 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#price2Tab" role="tab" aria-selected="false" tabindex="-1">
+                        가격 분석
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end card body -->
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="tab-content text-muted">
+              <div class="tab-pane fade show active" id="sale2Tab" role="tabpanel">
+                {% include "dashboards/summary/tabs/sale.html" %}
+              </div>
+              <div class="tab-pane fade show" id="channel2Tab" role="tabpanel">
+                {% include "dashboards/summary/tabs/channel.html" %}
+              </div>
+              <div class="tab-pane fade show" id="customer2Tab" role="tabpanel">
+                {% include "dashboards/summary/tabs/customer.html" %}
+              </div>
+              <div class="tab-pane fade show" id="price2Tab" role="tabpanel">
+                {% include "dashboards/summary/tabs/price.html" %}
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+  </div>
+  <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+  <script src=" {% static 'js/dashboards/summary/tabs/sale.js'%} "></script>
+  <script src=" {% static 'js/dashboards/summary/tabs/channel.js'%} "></script>
+  <script src=" {% static 'js/dashboards/summary/tabs/customer.js'%} "></script>
+  <script src=" {% static 'js/dashboards/summary/tabs/price.js'%} "></script>
+  <script>
+    window.onload = function () {
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+          // 매출 탭 이벤트 적용
+          let initData = "{{initData|safe}}";
+          let jsonData = JSON.parse(initData.replace(/'/g, "\""));
+
+          sale.onLoadEvent(jsonData);
+
+          const ul = document.querySelector('#summary-tablist');
+          const d_vr = document.querySelector('#d_vr');
+          const d_dropdown = document.querySelector('#d_dropdown');
+          const tabList = ul.querySelectorAll('[role="tab"]');
+          tabList.forEach(function (tab) {
+            const href = tab.getAttribute("href");
+
+            tab.addEventListener('click', function (e) {
+
+              d_vr.style.visibility = "visible";
+              d_dropdown.style.visibility = "visible";
+
+              if (href.includes("sale2Tab")) {
+                if (!sale.onloadStatus) {
+                  sale.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("channel2Tab")) {
+
+                d_vr.style.visibility = "hidden";
+                d_dropdown.style.visibility = "hidden";
+
+                if (!chan.onloadStatus) {
+                  chan.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("customer2Tab")) {
+                if (!cust.onloadStatus) {
+                  cust.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("price2Tab")) {
+                if (!price.onloadStatus) {
+                  price.onLoadEvent(jsonData);
+                }
+              }
+            });
+          });
+
+        }, 100);
+      };
+      //////////////////////////////////
+      let currencyImg = document.getElementsByClassName("currency-img");
+      if (currencyImg) {
+        Array.from(currencyImg).forEach(function (t) {
+          t.addEventListener("click", function (e) {
+            document.getElementById("selected-currency-img").src = t.getAttribute("data-img");
+            document.getElementById("selected-currency-title").innerText = t.getAttribute("data-title");
+            document.getElementById("selected-currency-img").dataset.currency = t.getAttribute("data-currency");
+            /* currency 변경에 따른 이벤트 처리 */
+            let currentTab = document.querySelector('.active').getAttribute("href");
+            if (currentTab.includes("sale2Tab")) {
+              sale.setDataBinding();
+            } else if (currentTab.includes("channel2Tab")) {
+              chan.setDataBinding();
+            } else if (currentTab.includes("price2Tab")) {
+              price.setDataBinding();
+            }
+          });
+        });
+      }
+      //////////////////////////////////
+  </script>
+{% endblock extra_js %}

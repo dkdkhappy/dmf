@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center gy-3">
+                    <div class="col-xxl-7 col-xl-6 col-md-6">
+                        <h6 class="card-title mb-0 d-flex align-items-center">Intersection finder
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.routeFinderTooltip|safe}}></button>
+                        </h6>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-xxl-5 col-xl-6 col-md-6">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-check form-switch mb-0 mt-1">
+                                    <input class="form-check-input" type="checkbox" checked role="switch" id="rtGoogleSearch">
+                                    <label class="form-check-label" for="rtGoogleSearch">구글 자동완성</label>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="col-4">
+                                <div class="form-check form-switch mb-0 mt-1">
+                                    <input class="form-check-input" type="checkbox" checked role="switch" id="rtNaverSearch">
+                                    <label class="form-check-label" for="rtNaverSearch">네이버 연관검색어</label>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="col-4">
+                                <div class="form-check form-switch mb-0 mt-1">
+                                    <input class="form-check-input" type="checkbox" checked role="switch" id="rtGoogleTrend">
+                                    <label class="form-check-label" for="rtGoogleTrend">구글 트렌드</label>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-xxl-3 col-sm-3">
+                        <input type="text" class="form-control" id="ifSearchKwd1" placeholder="첫 번째 키워드를 입력하세요.  ">
+                    </div>
+                    <!-- end col -->
+                    <div class="col-xxl-3 col-sm-3">
+                        <input type="text" class="form-control" id="ifSearchKwd2" placeholder="두 번째 키워드를 입력하세요.  ">
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-2 col-sm-2">
+                        <select class="form-control" name="ifJumpNumber" id="ifJumpNumber">
+                            <option value="">점프수 선택</option>
+                            <option value="0" selected>1</option>
+                            <option value="1">2</option> 
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                        </select>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-2 col-sm-2">
+                        <input type="text" class="form-control" id="ifSearchVolumeLimit" placeholder="검색량 제한을 입력하세요.  " value="1000">
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-2 col-sm-2">
+                        <a class="btn btn-primary waves-effect waves-light w-100" onclick="route.searchData();">검색</a>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center gy-3">
+                    <div class="col-12">
+                        <h6 class="card-title mb-0 d-flex align-items-center">Intersection Chart
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.sankeyChartTooltip|safe}}></button>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="network-chart-intersection" style="height: 500px;" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->

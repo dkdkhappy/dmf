@@ -1,0 +1,605 @@
+<div class="row">
+  <div class="col-xxl-4 col-sm-6">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center">기준일 방문자 수
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.bfrVisitorTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx fs-17 me-2 fw-bold"></i>
+            <span id="vist_cnt" class="counter-value" data-target="">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="vist_rate_arrow" class="align-middle"></i>
+              <span id="vist_rate">0</span>
+            </span>
+            <span class="text-muted">전년 기준일 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart7"></div>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <!--end col-->
+  <div class="col-xxl-4 col-sm-6">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당월 누적 방문자 수<span class="text-muted">{{initData.base_mnth}}</span>
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.mnthVisitorTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx bx fs-17 me-2 fw-bold"></i>
+            <span id="vist_cnt_mnth" class="counter-value" data-target="">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="vist_rate_mnth_arrow" class="align-middle"></i>
+              <span id="vist_rate_mnth">0</span>
+            </span>
+            <span class="text-muted">전년 동기 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart8"></div>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <!--end col-->
+  <div class="col-xxl-4 col-sm-6">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">
+            당해 누적 방문자 수<span class="text-muted">{{initData.base_year}}</span>
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.yrVisitorTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx bx fs-17 me-2 fw-bold"></i>
+            <span id="vist_cnt_year" class="counter-value" data-target="">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="vist_rate_year_arrow" class="align-middle"></i>
+              <span id="vist_rate_year">0</span>
+            </span>
+            <span class="text-muted">전년 동기 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart9"></div>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <!--end col-->
+  <div class="col-xxl-2 col-sm-6">
+    <div class="card card-animate g-height-110px justify-content-center">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center">
+            객단가
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.customerPriceTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx bx bx-yen fs-18 me-2 fw-bold"></i>
+            <span id="cust_amt" class="counter-value" data-target="">0</span>
+          </h5>
+          <p class="mb-0 text-muted">
+            <span class="badge bg-light mb-0">
+              <i id="cust_rate_arrow" class="align-middle"></i>
+              <span id="cust_rate">0</span>
+            </span>
+            전년 동기 대비
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <!--end col-->
+  <div class="col-xxl-2 col-sm-6">
+    <div class="card card-animate g-height-110px justify-content-center">
+      <div class="card-body" style="z-index:1 ;">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 overflow-hidden">
+            <h6 class="mb-3 fs-14 d-flex align-items-center">클릭 전환율
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.clickConversion|safe}}></button>
+            </h6>
+            <h5 class="d-flex align-items-flex-start">
+              <span id="clck_cnt" class="counter-value" data-target="">0</span>
+            </h5>
+          </div>
+          <div class="flex-shrink-0">
+            <div id="redial_click" data-colors='["--vz-success","--vz-heading-color"]' class="apex-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end card-->
+  </div>
+  <!--end col-->
+  <div class="col-xxl-4 col-sm-6">
+    <div class="card card-animate overflow-hidden">
+      <div class="position-absolute start-0" style="z-index: 0;">
+        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+          <style>
+            .s0 {
+              opacity: 0.05;
+              fill: var(--vz-secondary);
+            }
+          </style>
+          <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+        </svg>
+      </div>
+      <div class="card-body" style="z-index:1 ;">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 overflow-hidden">
+            <h5 class="mb-3 fs-14 d-flex align-items-center">재 구매자 비율
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.reBuyerRatio|safe}}></button>
+            </h5>
+            <h5 class="d-flex align-items-flex-start">
+              <span id="repd_cnt" class="counter-value" data-target="">0</span>
+            </h5>
+          </div>
+          <div class="flex-shrink-0">
+            <div id="redial_rebuy" data-colors='["--vz-success","--vz-heading-color"]' class="apex-charts" dir="ltr"></div>
+          </div>
+        </div>
+      </div>
+      <!-- end card body -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!--end col-->
+  <div class="col-xxl-4 col-sm-6">
+    <div class="card card-animate overflow-hidden">
+      <div class="position-absolute start-0" style="z-index: 0;">
+        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+          <style>
+            .s0 {
+              opacity: 0.05;
+              fill: var(--vz-secondary);
+            }
+          </style>
+          <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+        </svg>
+      </div>
+      <div class="card-body" style="z-index:1 ;">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 overflow-hidden">
+            <h5 class="mb-3 fs-14 d-flex align-items-center">구매자 비율
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.buyerRatiorTooltip|safe}}></button>
+            </h5>
+            <h5 class="d-flex align-items-flex-start">
+              <span id="paid_cnt" class="counter-value" data-target="">0</span>
+            </h5>
+          </div>
+          <div class="flex-shrink-0">
+            <div id="redial_customer" data-colors='["--vz-success","--vz-heading-color"]' class="apex-charts" dir="ltr"></div>
+          </div>
+        </div>
+      </div>
+      <!-- end card body -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!--end col-->
+</div>
+<!--end row 여기까지 중요정보 카드 끝-->
+
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header border-0">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">방문자 수 시계열 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.visitorTimeSeriesTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="visitorTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+
+      <div class="card-header p-0 border-0 bg-soft-light">
+        <div class="row g-0 text-center">
+          <div class="col-4">
+            <div class="p-3 h-100 border border-dashed border-start-0">
+              <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                <i class="bx bx me-2 fw-bold"></i>
+                <span id="time_series_vist_cnt" class="counter-value" data-target="">0</span>
+              </h5>
+              <p class="text-muted mb-0">당해 누적 방문자 수</p>
+            </div>
+          </div>
+          <!--end col-->
+          <div class="col-4">
+            <div class="p-3 h-100 border border-dashed border-start-0">
+              <h5 class="mb-1">
+                <i class="bx bx me-2 fw-bold"></i>
+                <span id="time_series_vist_cnt_yoy" class="counter-value" data-target="">0</span></h5>
+              <p class="text-muted mb-0">전년도 누적 방문자 수</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-3 h-100 border border-dashed border-start-0 border-end-0">
+              <h5 class="mb-1">
+                <i id="time_series_visit_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                <span id="time_series_visit_rate" class="">0</span>
+              </h5>
+              <p class="text-muted mb-0">증감률</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div id="chart_line_visit" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+      <!-- end card body -->
+      <div class="mt-1 card-footer g-min-height-xl-242px">
+        <div id="visitCountList" class="table-card"></div>
+      </div>
+      <!-- end card footer -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header border-0">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">요일 방문자 수 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.visitorWeekdayChart|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="dayTimeVisitorCntViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <!--컨텐츠-->
+            <div id="chart-line-time-custs" style="height: 657px;" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            <!--그래프-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">클릭 전환율 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.clickConversionTS|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="clickChangeRateFlatpickr" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div id="chart-line-click-change" class="e-charts"></div>
+      </div>
+      <!-- end card body -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">요일별 클릭 전환율 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.clickConversionWeekdayTS|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="dayClickChangeRateFlatpickr" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-line-day-click-change" class="e-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header border-0">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+            <h4 class="card-title mb-0 d-flex align-items-center">구매자 수 시계열 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.buyerTimeSeriesTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="buyerTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+
+      <div class="card-header p-0 border-0 bg-soft-light">
+        <div class="row g-0 text-center">
+          <div class="col-4">
+            <div class="p-3 h-100 border border-dashed border-start-0">
+              <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                <i class="bx bx me-2 fw-bold"></i>
+                <span id="time_series_buyer_cnt" class="counter-value" data-target="">0</span>
+              </h5>
+              <p class="text-muted mb-0">당해 누적 구매자 수</p>
+            </div>
+          </div>
+          <!--end col-->
+          <div class="col-4">
+            <div class="p-3 h-100 border border-dashed border-start-0">
+              <h5 class="mb-1">
+                <i class="bx bx me-2 fw-bold"></i>
+                <span id="time_series_buyer_cnt_yoy" class="counter-value" data-target="">0</span></h5>
+              <p class="text-muted mb-0">전해 누적 구매자 수</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-3 h-100 border border-dashed border-start-0 border-end-0">
+              <h5 class="mb-1">
+                <i id="time_series_buyer_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                <span id="time_series_buyer_rate" class="">0</span>
+              </h5>
+              <p class="text-muted mb-0">증감률</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div id="chart-line-buyer" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+      <!-- end card body -->
+      <div class="mt-1 card-footer g-min-height-xl-242px">
+        <div id="buyerCountList" class="table-card"></div>
+      </div>
+      <!-- end card footer -->
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+            <h4 class="card-title mb-0 d-flex align-items-center">구매자 첫 구매 / 재 구매 비율
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.buyerNewReRatioTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="buyerFirstBuyRebuyChart" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div id="chart-mix-buy-rebuy" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+      <div class="mt-1 card-footer">
+        <div id="firstBuyRebuyList" class="table-card"></div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">구매자 객단가 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.buyerCustPriceGraphTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="custPriceViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-mix-cust-price" class="e-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">구매자 수익 그래프
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.buyerRevGraphTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="custRevenueViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-bar-cust-revenue" class="e-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-xxl-12 col-sm-12">
+            <h4 class="card-title mb-0 d-flex align-items-center">방문자 지역 분포
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.locationRatioTooltip|safe}}></button>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-map" class="e-charts" style="height:600px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xxl-4 col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-xxl-12 col-sm-12">
+            <h4 class="card-title mb-0 d-flex align-items-center">방문자 지역 분류별 분포
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.locationLevelRatioTooltip|safe}}></button>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-bar-regi-grade" class="e-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+
+  <div class="col-xxl-4 col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-xxl-12 col-sm-12">
+            <h4 class="card-title mb-0 d-flex align-items-center">방문자 성별 분포
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.genderRatioTooltip|safe}}></button>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-gender" class="e-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+  <div class="col-xxl-4 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-xxl-12 col-sm-12">
+            <h4 class="card-title mb-0 d-flex align-items-center">방문자 연령 분포
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.ageRatioTooltip|safe}}></button>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <div id="chart-bar-age" class="e-charts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+
+<div id="loading-bar-custom" class="e-charts" style="display: none;"></div>

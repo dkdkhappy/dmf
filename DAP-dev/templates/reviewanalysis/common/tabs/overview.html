@@ -1,0 +1,391 @@
+<div class="row">
+  <div class="col-xxl-3 col-sm-6">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center">전체 수집 리뷰 수
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.colReviewsTooltip|safe}}></button>
+          </h6>
+          <h5>
+            <span id="revw_cnt" class="counter-value" data-target="">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="revw_rate_arrow" class="align-middle"></i>
+              <span id="revw_rate">0</span>
+            </span>
+            <span class="text-muted">기준월 전월 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="totalReviewCount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-3 col-sm-6">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center">수집된 리뷰의 긍정 부정 비중
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.sentRatioTooltip|safe}}></button>
+          </h6>
+          <p class="text-primary fs-14 mb-1">긍정
+            <span class="badge bg-light text-primary fs-10 ">
+              <!-- <i class="ri-arrow-up-line align-middle"></i> -->
+              <span id="pstv_cnt" class="counter-value" data-target="">0</span>%
+            </span>
+          </p>
+          <p class="text-danger fs-14">부정
+            <span class="badge badge-soft-danger fs-10 ">
+              <!-- <i class="ri-arrow-down-line align-middle"></i> -->
+              <span id="ngtv_cnt" class="counter-value" data-target="">0</span>%
+            </span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-primary", "--vz-gray-500", "--vz-danger"]' dir="ltr" id="positiveScoreChart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-3 col-sm-6 z-index-1">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center">더마펌 제품 중 긍정 변화 1위
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.posProdTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start text-primary fs-16" style="justify-content: space-between;">
+            <span id="pstv_prod_nm" class="text-overflow"></span>
+            <button type="button" class="badge badge-soft-info waves-effect fs-10 border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="">더보기</button>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="pstv_rate_chng_arrow" class="align-middle"></i>
+              <span id="pstv_rate_chng">0</span>
+            </span>
+            <span class="text-muted">전월 대비</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-3 col-sm-6">
+    <div class="card card-animate g-height-110px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center">더마펌 제품 중 부정 변화 1위
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.negProdTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start text-danger fs-16" style="justify-content: space-between;">
+            <span id="ngtv_prod_nm" class="text-overflow"></span>
+            <button type="button" class="badge badge-soft-info waves-effect fs-10 border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="">더보기</button>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="ngtv_rate_chng_arrow" class="align-middle"></i>
+              <span id="ngtv_rate_chng">0</span>
+            </span>
+            <span class="text-muted">전월 대비</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-7">
+            <div class="d-flex align-items-center">
+              <h4 class="card-title mb-0 d-flex align-items-center">제품 별 리뷰 지도
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.reviewMapTooltip|safe}}></button>
+              </h4>
+            </div>
+          </div>
+          <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+            <button type="button" class="pstv1 btn error btn-soft-primary btn-sm btn-sm-ov">긍정</button>
+            <button type="button" class="ngtv1 btn nomal btn-soft-danger btn-sm btn-sm-ov">부정</button>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="salesTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <!-- Topic selector -->
+      <div class="card-body border-bottom">
+        <form>
+          <div class="row g-3">
+            <div class="col-xxl-9 col-sm-9">
+              <select class="form-control" id="reviewmapCateChoice">
+                <option value="">카테고리를 선택하세요.</option>
+              </select>
+            </div>
+            <div class="col-xxl-3 col-sm-3">
+              <div>
+                <button type="button" class="btn btn-primary w-100" onclick="reviewAnalysisOverview.topicReviewTreeMapSearch();">검색</button>
+              </div>
+            </div>
+          </div>
+          <!--end row-->
+        </form>
+      </div>
+
+      <!-- Topic slector end-->
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-tree-prod-review" class="e-charts" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'></div>
+      </div>
+      <!-- end card body -->
+    </div>
+    <!-- end card -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xxl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-7">
+            <div class="d-flex align-items-center">
+              <h6 class="card-title mb-0 d-flex align-items-center">토픽 별 / 제품 별 히트맵
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.topicHeatmapTooltip|safe}}></button>
+              </h6>
+            </div>
+          </div>
+          <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+            <button type="button" class="pstv2 btn error btn-soft-primary btn-sm btn-sm-ov">긍정</button>
+            <button type="button" class="ngtv2 btn nomal btn-soft-danger btn-sm btn-sm-ov">부정</button>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control flatpickr-input active text-muted" id="heatMapDatepicker" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body border-bottom">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-3 col-sm-5">
+              <select class="form-control" id="topic_product_heatmap_overview" data-placeholder="토픽을 선택하세요.   "></select>
+            </div>
+            <div class="col-md-9 col-sm-7">
+              <select class="form-control" id="topic_product_heatmap_overview_sub" disabled="disabled" multiple="multiple"></select>
+            </div>
+            <!--end col-->
+          </div>
+
+          <div class="row mt-1 g-3">
+            <div class="col-md-9 col-sm-9">
+              <select class="form-control" id="topic_product_heatmap_overview_prod" multiple="multiple"></select>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <div>
+                <button type="button" class="btn btn-primary w-100" onclick="reviewAnalysisOverview.topicProductHeatmapOverview();">검색</button>
+              </div>
+            </div>
+          </div>
+          <!--end row-->
+        </form>
+      </div>
+      <div class="card-body">
+        <!--그래프-->
+        <div id="heat-map-topic-prod" class="e-charts" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xxl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-7">
+            <div class="d-flex align-items-center">
+              <h6 class="card-title mb-0 d-flex align-items-center">제품 별 토픽 순위
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.prodTopicRankTooltip|safe}}></button>
+              </h6>
+            </div>
+          </div>
+          <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+            <button type="button" class="pstv3 btn error btn-soft-primary btn-sm btn-sm-ov">긍정</button>
+            <button type="button" class="ngtv3 btn nomal btn-soft-danger btn-sm btn-sm-ov">부정</button>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control flatpickr-input active text-muted" id="prodTopicRankDatepicker" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body border-bottom">
+        <form>
+          <div class="row g-3">
+            <div class="col-xxl-9 col-sm-9">
+              <select class="form-control" id="choices-multiple-barchart">
+                <option value="">제품을 선택하세요.</option>
+              </select>
+            </div>
+            <div class="col-xxl-3 col-sm-3">
+              <div>
+                <button type="button" class="btn btn-primary w-100" onclick="reviewAnalysisOverview.productTopicRankingBarChartEvent();">검색</button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
+        </form>
+      </div>
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-bar-topic-rank" class="e-charts g-height-409px" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+            <h4 class="card-title mb-0 d-flex align-items-center">전월 대비 제품 긍정, 부정 비율 변화 순위
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.deltaSentRankTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+            <select class="form-control" id="choices-rank">
+              <option value="">카테고리를 선택하세요.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card-body g-height-382px">
+        <div id="posi-nega-mom" class="table-card"></div>
+      </div>
+      <!-- end card header -->
+    </div>
+    <!-- end card -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+            <div class="d-flex align-items-center">
+              <h6 class="card-title mb-0 d-flex align-items-center">제품 별 긍, 부정 비율 시계열 그래프
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.prodSentTimeseriesTooltip|safe}}></button>
+              </h6>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control flatpickr-input active text-muted" id="seriesDatepicker" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body border-bottom">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-3 col-sm-3">
+              <select class="form-control" id="choices-search-type" data-choices="data-choices" data-choices-search-false="data-choices-search-false">
+                <option value="1">누적</option>
+                <option value="2">시점</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <select class="form-control" id="choices-multiple-topic-chart" multiple="multiple"></select>
+            </div>
+            <!--end col-->
+            <div class="col-xxl-3 col-sm-3">
+              <div>
+                <button type="button" class="btn btn-primary w-100" onclick="reviewAnalysisOverview.productSentimentRatioTimeSeriesSch();">검색</button>
+              </div>
+            </div>
+          </div>
+
+          <!--end row-->
+        </form>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-mix-posi-nega" class="e-charts" data-colors='["--vz-success", "--vz-warning", "--vz-danger"]'></div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+            <div class="d-flex align-items-center">
+              <h6 class="card-title mb-0 d-flex align-items-center">제품 별 리뷰 속성 그래프
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.reviewSentDetailTooltip|safe}}></button>
+              </h6>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control flatpickr-input active text-muted" id="reviewDatepicker" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body border-bottom">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-3 col-sm-3">
+              <select class="form-control" id="choices-prod-search-type" data-choices="data-choices" data-choices-search-false="data-choices-search-false">
+                <option value="1">리뷰 수</option>
+                <option value="2">퍼센트</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <select class="form-control" id="choices-multiple-topic-pn-chart" multiple="multiple"></select>
+            </div>
+            <!--end col-->
+            <div class="col-xxl-3 col-sm-3">
+              <div>
+                <button type="button" class="btn btn-primary w-100" onclick="reviewAnalysisOverview.productReviewAttributeChartSch();">검색</button>
+              </div>
+            </div>
+          </div>
+
+          <!--end row-->
+        </form>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <!--컨텐츠-->
+        <div id="chart-bar-prod-review" class="e-charts"></div>
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+</div>

@@ -1,0 +1,12 @@
+/* 1. 도우인 경쟁사 비중 - 카테고리 선택 SQL */
+WITH WT_BASE AS
+    (
+        SELECT CATEGORY_NO   AS CATE_NO
+              ,CATEGORY_NAME AS CATE_NM
+          FROM DASH_RAW.OVER_DOUYIN_ITEM_RANK_CATEGORY
+         WHERE CATEGORY_NAME != '전체'
+    )
+    SELECT CATE_NO
+          ,CATE_NM
+      FROM WT_BASE
+  ORDER BY CATE_NO

@@ -1,0 +1,15 @@
+.venv
+/static/
+/test/
+/node_modules/
+*lock.json
+*.lock
+*__pycache__/
+*.pyc
+/filepond-temp-uploads/
+/stored_uploads/
+korea_material_dict_syllables.txt
+db.sqlite3
+/staticfiles/
+migrations
+filefond_temp_uploads

@@ -1,0 +1,254 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title%}Tmall 글로벌{% endblock title %}
+{% block extra_css %}
+  <style>
+    .currency-exchange {
+      margin-right: 5px;
+    }
+
+    .currency-exchange.cny:before {
+      content: "¥";
+    }
+
+    .currency-exchange.krw:before {
+      content: "";
+    }
+  </style>
+{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mt-n4 mx-n4">
+              <div class="bg-soft-warning">
+                <div class="card-body pb-0 px-4">
+                  <div class="row mb-3">
+                    <div class="col-md">
+                      <div class="row align-items-center g-3">
+                        <div class="col-md-auto">
+                          <div class="avatar-md">
+                            <div class="avatar-title bg-white rounded-circle">
+                              <img src="{% static 'images/brands/dashboard.png'%}" alt="" class="avatar-xs">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div>
+                            <h4 class="fw-bold">중국 매출 대시보드 - Tmall 글로벌</h4>
+                            <div class="hstack gap-3 flex-wrap">
+                              <div>
+                                <i class="bx bxs-dashboard align-middle"></i>
+                                중국 매출 대시보드</div>
+                              <div class="vr"></div>
+                              <div>기준일 :
+                                <span class="fw-medium" id="x_dt">{{initData.base_dt}}</span></div>
+                              <div class="vr"></div>
+                              <div class="dropdown">
+                                <button type="button" class="btn btn-ghost-secondary d-flex align-items-center" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img id="selected-currency-img" data-currency="cny" src="{% static 'images/flags/cn.svg'%}" alt="Header Language" height="20" class="me-2 rounded">
+                                  <p id="selected-currency-title" class="mb-0" style="height: 16px;">RMB중국위안화</p>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2 currency-img" title="China" data-title="RMB중국위안화" data-img="{% static 'images/flags/cn.svg'%}" data-currency="cny">
+                                    <img src="{% static 'images/flags/cn.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">RMB중국위안화</span>
+                                  </a>
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item currency-img" title="Korea" data-title="KRW한국원화" data-img="{% static 'images/flags/kr.svg'%}" data-currency="krw">
+                                    <img src="{% static 'images/flags/kr.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">KRW한국원화</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul id="tmallglobal-tablist" class="nav nav-tabs-custom border-bottom-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body active fw-semibold" data-bs-toggle="tab" href="#saleTab" role="tab" aria-selected="true">
+                        매출
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#channelTab" role="tab" aria-selected="false" tabindex="-1">
+                        채널 수익
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#customerTab" role="tab" aria-selected="false" tabindex="-1">
+                        고객 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#funnelTab" role="tab" aria-selected="false" tabindex="-1">
+                        퍼널 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#priceTab" role="tab" aria-selected="false" tabindex="-1">
+                        가격 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#competeTab" role="tab" aria-selected="false" tabindex="-1">
+                        경쟁사 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation" style="display:none;">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#marketingTab" role="tab" aria-selected="false" tabindex="-1">
+                        마케팅 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation" style="display:none;">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#liveTab" role="tab" aria-selected="false" tabindex="-1">
+                        라이브 분석
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end card body -->
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="tab-content text-muted">
+              <div class="tab-pane fade show active" id="saleTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/sale.html" %}
+              </div>
+              <div class="tab-pane fade show" id="channelTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/channel.html" %}
+              </div>
+              <div class="tab-pane fade show" id="customerTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/customer.html" %}
+              </div>
+              <div class="tab-pane fade show" id="funnelTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/funnel.html" %}
+              </div>
+              <div class="tab-pane fade show" id="priceTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/price.html" %}
+              </div>
+              <div class="tab-pane fade show" id="competeTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/compete.html" %}
+              </div>
+              <div class="tab-pane fade show" id="marketingTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/marketing.html" %}
+              </div>
+              <div class="tab-pane fade show" id="liveTab" role="tabpanel">
+                {% include "dashboards/tmallglobal/tabs/live.html" %}
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+        
+        <!-- Grids in modals -->
+        <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div id="grid-table"></div>         
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="saveButton">엑셀 다운로드</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+      </div>
+        <!-- container-fluid -->
+      </div>
+      <!-- End Page-content -->
+    </div>
+    <!-- end main content-->
+  {% endblock content %}
+  {% block extra_js %}
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/sale.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/channel.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/customer.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/funnel.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/price.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/compete.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/marketing.js'%} "></script>
+    <script src=" {% static 'js/dashboards/tmallglobal/tabs/live.js'%} "></script>
+    <!-- Sheet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <!--FileSaver savaAs 이용 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script>
+      window.onload = function () {
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+          // 매출 탭 이벤트 적용
+          let initData = "{{initData|safe}}";
+          let jsonData = JSON.parse(initData.replace(/'/g, "\""));
+
+          sale.onLoadEvent(jsonData);
+
+          const ul = document.querySelector('#tmallglobal-tablist');
+          const tabList = ul.querySelectorAll('[role="tab"]');
+          tabList.forEach(function (tab) {
+            const href = tab.getAttribute("href");
+
+            tab.addEventListener('click', function (e) {
+              if (href.includes("saleTab")) {
+                if (!sale.onloadStatus) {
+                  sale.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("channelTab")) {
+                if (!chan.onloadStatus) {
+                  chan.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("customerTab")) {
+                if (!cust.onloadStatus) {
+                  cust.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("funnelTab")) {
+                if (!funnel.onloadStatus) {
+                  funnel.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("priceTab")) {
+                if (!price.onloadStatus) {
+                  price.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("competeTab")) {
+                if (!compete.onloadStatus) {
+                  compete.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("marketingTab")) {
+                if (!mktg.onloadStatus) {
+                  mktg.onLoadEvent(jsonData);
+                }
+              } else if (href.includes("liveTab")) {
+                if (!live.onloadStatus) {
+                  live.onLoadEvent(jsonData);
+                }
+              }
+            });
+          });
+
+        }, 100);
+      };
+
+      //////////////////////////////////
+
+      //////////////////////////////////
+    </script>
+  {% endblock extra_js %}

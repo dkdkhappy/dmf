@@ -1,0 +1,157 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center gy-3">
+                    <div class="col-xxl-7 col-xl-6 col-md-6">
+                        <h6 class="card-title mb-0 d-flex align-items-center">Network analysis
+                            <button type="button" class="btn-question border-dark fs-10 text-muted"
+                                data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-original-title={{toolTips.networkTooltip|safe}}></button>
+                        </h6>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-xxl-5 col-xl-6 col-md-6">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-check form-switch mb-0 mt-1">
+                                    <input class="form-check-input" type="checkbox" checked role="switch"
+                                        id="nwGoogleSearch">
+                                    <label class="form-check-label" for="nwGoogleSearch">구글 자동완성</label>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="col-4">
+                                <div class="form-check form-switch mb-0 mt-1">
+                                    <input class="form-check-input" type="checkbox" checked role="switch"
+                                        id="nwNaverSearch">
+                                    <label class="form-check-label" for="nwNaverSearch">네이버 연관검색어</label>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="col-4">
+                                <div class="form-check form-switch mb-0 mt-1">
+                                    <input class="form-check-input" type="checkbox" checked role="switch"
+                                        id="nwGoogleTrend">
+                                    <label class="form-check-label" for="nwGoogleTrend">구글 트렌드</label>
+                                </div>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-xxl-3 col-sm-3">
+                        <select class="form-control" name="nwSearchKwdChoice" id="nwSearchKwdChoice">
+                            <option value="bipath">전체</option>
+                            <option value="forward">최초 검색어</option>
+                            <option value="backward">최종 검색어</option>
+                        </select>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-xxl-9 col-sm-9">
+                        <input type="text" class="form-control" id="nwSearchKwd" placeholder="키워드를 입력하세요.  " value="">
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+                <div class="row g-3 mt-1">
+                    <div class="col-md-3 col-sm-3">
+                        <select class="form-control" name="nwJumpNumber" id="nwJumpNumber">
+                            <option value="">점프수 선택</option>
+                            <option value="0" selected>1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                        </select>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-md-6 col-sm-6">
+                        <input type="text" class="form-control" id="nwSearchVolumeLimit" placeholder="검색량 제한을 입력하세요.  "
+                            value="1000">
+                    </div>
+                    <!-- end col -->
+                    <!--
+                    <div class="col-xxl-3 col-sm-3">
+                        <select class="form-control" name="nwGenderChoice" id="nwGenderChoice">
+                            <option value="">전체</option>
+                            <option value="male">남자</option>
+                            <option value="female">여자</option>
+                        </select>
+                    </div>-->
+                    <!-- end col -->
+                    <div class="col-md-3 col-sm-3">
+                        <a class="btn btn-primary waves-effect waves-light w-100" onclick="network.searchData();">검색</a>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center gy-3">
+                    <div class="col-12">
+                        <h6 class="card-title mb-0 d-flex align-items-center">network chart
+                            <button type="button" class="btn-question border-dark fs-10 text-muted"
+                                data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-original-title={{toolTips.networkchartTooltip|safe}}></button>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="chart-network-analysis" style="height:500px;"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-bottom">
+                <div class="row g-3 align-items-center">
+                  <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h6 class="card-title mb-0 flex-grow-1 d-flex align-items-center">Chat GPT 분류 및 설명
+                            <button type="button" class="btn-question border-dark fs-10 text-muted"
+                                data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-original-title={{toolTips.networkchartGPTTooltip|safe}}></button>
+                        </h6>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <a class="btn btn-primary waves-effect waves-light w-100" onclick="network.searchChatgpt();">실행</a>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <div id="displayGPT" style="font-size: 14px; height:500px;"></div>                    
+                    </div>
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>

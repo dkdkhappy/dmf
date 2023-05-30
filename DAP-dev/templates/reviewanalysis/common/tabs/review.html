@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="orderList">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-7 col-sm-4 col-md-6 col-lg-6 col-xxl-6">
+            <div class="d-flex align-items-center">
+              <h6 class="card-title mb-0 d-flex align-items-center">Review
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-original-title={{toolTips.reviewOriginTextTooltip|safe}}></button>
+              </h6>
+            </div>
+          </div>
+          <div class="col-5 col-sm-3 col-md-2 col-lg-2 col-xxl-3" style="text-align: right;">
+            <button type="button" class="btn btn-primary waves-effect waves-light reviewDownload">다운로드</button>
+          </div>
+          <div class="col-12 col-sm-5 col-md-4 col-lg-4 col-xxl-3">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="reviewViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-header border-0">
+        <div class="row g-3">
+          <div class="col-xxl-3 col-sm-3">
+            <select class="form-control" id="reviewGridSearchTopic">
+              <option value="">토픽을 선택하세요.</option>
+            </select>
+          </div>
+          <div class="col-xxl-9 col-sm-9">
+            <select class="form-control" id="reviewGridSearchDetailTopic" multiple="multiple"></select>
+          </div>
+          <div class="col-xxl-3 col-sm-3">
+            <select class="form-control" id="choicesCmTrendSelect">
+              <option value="전체" selected="selected">전체</option>
+              <option value="긍정">긍정</option>
+              <option value="부정">부정</option>
+            </select>
+          </div>
+          <div class="col-xxl-6 col-sm-6">
+            <select class="form-control" id="reviewGridSearchProd" multiple="multiple"></select>
+          </div>
+          <div class="col-xxl-3 col-sm-3">
+            <a class="btn btn-primary waves-effect waves-light w-100" id="reviewGridSearchBtn">검색</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body pt-0">
+        <div class="col-lg-12">
+          <div id="reviewList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <!-- start col -->
+  <div class="col-xxl-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+            <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center">Chat GPT를 이용한 리뷰 요약
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-html="true"  data-bs-html="true" data-bs-original-title={{toolTips.reviewChatGPTTooltip|safe}} ></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+            <a class="btn btn-primary waves-effect waves-light w-100" id="reviewChatGPTSearchBtn">실행</a>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0">
+        <div class="col-lg-12">
+          <div class="card-body">
+            <!--컨텐츠-->
+            <div id="reviewGptDisplay" class="w-100" style="font-size: 14px; height:500px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+</div>

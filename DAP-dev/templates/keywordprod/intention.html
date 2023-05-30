@@ -1,0 +1,364 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card" id="orderList">
+        <div class="card-header">
+          <div class="row align-items-center gy-3">
+            <div class="col-sm">
+              <h6 class="card-title mb-0 d-flex align-items-center">Intention finder
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyAnalTooltip|safe}}></button>
+              </h6>
+            </div>
+            <div class="col-sm-auto text-muted">
+              <span class="fs-12">Latest Update :
+              </span>
+              <span class="fs-12">{{base_dt}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- <div class="input-group"> <div class="search-box"> <input id="dbSearchGridSearchInput" type="text" class="form-control search" placeholder="검색어를 입력하세요."> <i class="ri-search-line search-icon"></i> </div> <a class="btn btn-primary waves-effect waves-light" id="dbSearchGridSearchBtn">검색</a> </div> -->
+          <div class="row">
+            <div class="col-xxl-9 col-sm-8">
+              <div class="form-icon search-box">
+                <input class="form-control" id="ibxSearchKwd" data-choices-limit="20" data-choices-removeitem="data-choices-removeItem" type="text" value="" data-placeholder="검색어를 입력하세요.    "/>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-sm-4">
+              <a class="btn btn-primary waves-effect waves-light w-100" id="db-search-grid-search-btn">검색</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--end col-->
+
+  <!-- start row -->
+  <div class="row">
+    <div class="col-xxl-3 col-sm-6">
+      <div class="card card-animate g-height-110px">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 p-3">
+            <h6 class="mb-2 fs-14 d-flex align-items-center">Volume
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyVolTooltip|safe}}></button>
+            </h6>
+            <h5>
+              <span id="t_vol" class="counter-value" data-target="0">0</span>
+            </h5>
+            <p class="mb-0">
+              <span class="badge bg-light mb-0">
+                <i id="t_vol_rate_arrow" class="align-middle"></i>
+                <span id="t_vol_rate">0</span>
+              </span>
+              <span class="text-muted">누적기준 전월 대비</span>
+            </p>
+          </div>
+          <div>
+            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="volumeCount"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xxl-3 col-sm-6">
+      <div class="card card-animate g-height-110px">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 p-3">
+            <h6 class="mb-2 fs-14 d-flex align-items-center">Google Traffic
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyGoogTooltip|safe}}></button>
+            </h6>
+            <h5>
+              <span id="g_vol" class="counter-value" data-target="0">0</span>
+            </h5>
+            <p class="mb-0">
+              <span class="badge bg-light mb-0">
+                <i id="g_vol_rate_arrow" class="align-middle"></i>
+                <span id="g_vol_rate">0</span>
+              </span>
+              <span class="text-muted">누적기준 전월 대비</span>
+            </p>
+          </div>
+          <div>
+            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="googleTrafficCount"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xxl-3 col-sm-6">
+      <div class="card card-animate g-height-110px">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 p-3">
+            <h6 class="mb-2 fs-14 d-flex align-items-center">Naver Traffic
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyNaverTooltip|safe}}></button>
+            </h6>
+            <h5>
+              <span id="n_vol" class="counter-value" data-target="0">0</span>
+            </h5>
+            <p class="mb-0">
+              <span class="badge bg-light mb-0">
+                <i id="n_vol_rate_arrow" class="align-middle"></i>
+                <span id="n_vol_rate">0</span>
+              </span>
+              <span class="text-muted">누적기준 전월 대비</span>
+            </p>
+          </div>
+          <div>
+            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="naverTrafficCount"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xxl-3 col-sm-6">
+      <div class="card card-animate g-height-110px overflow-hidden">
+        <div class="position-absolute start-0" style="z-index: 0;">
+          <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+            <style>
+              .s0 {
+                opacity: 0.05;
+                fill: var(--vz-secondary);
+              }
+            </style>
+            <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+          </svg>
+        </div>
+        <div class="card-body mt-2" style="z-index:1 ;">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1 overflow-hidden">
+              <h6 class="mb-3 fs-14 d-flex align-items-center">CPC
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyCPCTooltip|safe}}></button>
+              </h6>
+              <h5 class="d-flex align-items-flex-start mb-0">
+                <i class="bx bx-dollar fs-18 me-2 fw-bold"></i>
+                <span id="g_cpc" class="counter-value" data-target="0">0</span>
+              </h5>
+            </div>
+            <div class="avatar-sm flex-shrink-0">
+              <span class="avatar-title bg-soft-primary rounded-circle fs-3">
+                <i class="bx bxl-google text-primary"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end col-->
+  </div>
+  <!-- end row -->
+
+  <!-- start row -->
+  <div class="row">
+    <!--start col-->
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-xxl-12 col-sm-12">
+              <h4 class="card-title mb-0 d-flex align-items-center">성별
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyGenderTooltip|safe}}></button>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-12">
+            <div class="card-body">
+              <div id="chart-gender" class="e-charts"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+    <!--end col-->
+
+    <!--start col-->
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header d-flex">
+          <div class="row g-3 align-items-center">
+            <div class="d-flex align-items-center">
+              <h6 class="card-title mb-0 d-flex align-items-center">연령별 Bar 그래프
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyAgeTooltip|safe}}></button>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!--그래프-->
+          <div id="chart-bar-age-rank" class="e-charts"></div>
+        </div>
+      </div>
+    </div>
+    <!--end col-->
+
+    <!--start col-->
+    <div class="col-xl-4 col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-header align-items-center d-flex">
+          <h6 class="card-title mb-0 d-flex align-items-center">정보성 VS 상업성
+          <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyInfoCommTooltip|safe}}></button>
+          </h6>
+        </div>
+        <!-- end card header -->
+
+        <div class="card-body">
+          <div id="versus-chart" style="height:262px;"></div>
+          <div class="mt-3">
+            <div class="d-flex justify-content-between border-bottom border-bottom-dashed py-2">
+              <p class="fw-medium mb-0">
+                <i class="ri-checkbox-blank-circle-fill text-primary align-middle me-2"></i>
+                정보성
+              </p>
+              <div>
+                <span class="text-muted pe-5"></span>
+                <span id="spnInfoRate" class="text-primary fw-medium fs-12">0%</span>
+              </div>
+            </div>
+            <!-- end -->
+            <div class="d-flex justify-content-between py-2">
+              <p class="fw-medium mb-0">
+                <i class="ri-checkbox-blank-circle-fill text-success align-middle me-2"></i>
+                상업성
+              </p>
+              <div>
+                <span class="text-muted pe-5"></span>
+                <span id="spnCommRate" class="text-success fw-medium fs-12">0%</span>
+              </div>
+            </div>
+            <!-- end -->
+          </div>
+        </div>
+      </div>
+      <!-- .card-->
+    </div>
+    <!--end col-->
+
+  </div>
+  <!-- end row -->
+
+  <!-- start row -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header align-items-center d-flex">
+          <h4 class="card-title mb-0 d-flex align-items-center">Volume Time Trend
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.keyVolTimeTooltip|safe}}></button>
+          </h4>
+        </div>
+        <!-- end card header -->
+
+        <!-- end card footer -->
+        <div class="card-body">
+          <div id="chart-line-volume-time-trend" class="e-charts"></div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+  </div>
+  <!-- end row -->
+
+  <!-- start row -->
+  <div class="row">
+    <!-- start col -->
+    <div class="col-xxl-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title mb-0 d-flex align-items-center">Google 연관 키워드 List
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.googleRelKeywordTootltip|safe}}></button>
+          </h4>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-12">
+            <div class="card-body g-height-319px">
+              <!--컨텐츠-->
+              <div id="google-related-keywords" class="table-card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end col -->
+    <!-- start col -->
+    <div class="col-xxl-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title mb-0 d-flex align-items-center">Naver 연관 키워드 List
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.naverRelKeywordTooltip|safe}}></button>
+          </h4>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-12">
+            <div class="card-body g-height-319px">
+              <!--컨텐츠-->
+              <div id="naver-related-keywords" class="table-card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->
+  <div class="row">
+    <!-- start col -->
+    <div class="col-xxl-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row g-3 align-items-center">
+            <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+              <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center">Top 30 비교
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.topKeywordCompareTooltip|safe}}></button>
+              </h4>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                <select class="form-control" name="top30VolChoice" id="top30VolChoice" >
+                    <option value="mom">1개월 전 검색량</option>                   
+                    <option value="yoy">과거 1년 누적 검색량</option>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-12">
+            <div class="card-body">
+              <!--컨텐츠-->
+              <div id="network-chart" class="w-100" style="text-align:center;height:500px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end col -->
+  </div>
+  <div class="row">
+    <!-- start col -->
+    <div class="col-xxl-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row g-3 align-items-center">
+            <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+              <h4 class="card-title mb-0 flex-grow-1 d-flex align-items-center">Chat GPT를 이용한 Top30에 대한 결과 해석
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-html="true" data-bs-original-title={{toolTips.intentionChatGPT|safe}} ></button>
+              </h4>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+              <a class="btn btn-primary waves-effect waves-light w-100" id="chat-gpt-comment-btn">실행</a>
+            </div>
+          </div>
+        </div>
+        <div class="row g-0">
+          <div class="col-lg-12">
+            <div class="card-body">
+              <!--컨텐츠-->
+              <div id="gpt-explain" class="w-100" style="font-size: 14px; height:500px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end col -->
+  </div>

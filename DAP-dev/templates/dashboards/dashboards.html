@@ -1,0 +1,324 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load file_exists %}
+{% block title%}{{pageInfo.title}}{% endblock title %}
+{% block extra_css %}
+  <style>
+    .currency-exchange {
+      margin-right: 5px;
+    }
+
+    .currency-exchange.cny:before {
+      content: "¥";
+    }
+
+    .currency-exchange.krw:before {
+      content: "";
+    }
+  </style>
+{% endblock extra_css %}
+{% block content %}
+  <!-- ============================================================== -->
+  <!-- Start right Content here -->
+  <!-- ============================================================== -->
+  <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mt-n4 mx-n4 g-mt-tab_menu-foreground">
+              <div class="bg-soft-warning">
+                <div class="card-body pb-0 px-4">
+                  <div class="row mb-3">
+                    <div class="col-md">
+                      <div class="row align-items-center g-3">
+                        <div class="col-md-auto">
+                          <div class="avatar-md">
+                            <div class="avatar-title bg-white rounded-circle">
+                              <img src="{% static 'images/brands/dashboard.png'%}" alt="" class="avatar-xs">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md">
+                          <div>
+                            <h4 class="fw-bold">중국 매출 대시보드 - {{pageInfo.title}}</h4>
+                            <div class="hstack gap-3 flex-wrap">
+                              <div>
+                                <i class="bx bxs-dashboard align-middle"></i>
+                                중국 매출 대시보드</div>
+                              <div class="vr"></div>
+                              <div>기준일 :
+                                <span class="fw-medium" id="x_dt">{{initData.base_dt}}</span></div>
+                              <div id="d_vr" class="vr"></div>
+                              <div id="d_dropdown" class="dropdown">
+                                <button type="button" class="btn btn-ghost-secondary d-flex align-items-center" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img id="selected-currency-img" data-currency="cny" src="{% static 'images/flags/cn.svg'%}" alt="Header Language" height="20" class="me-2 rounded">
+                                  <p id="selected-currency-title" class="mb-0" style="height: 16px;">RMB중국위안화</p>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item py-2 currency-img" title="China" data-title="RMB중국위안화" data-img="{% static 'images/flags/cn.svg'%}" data-currency="cny">
+                                    <img src="{% static 'images/flags/cn.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">RMB중국위안화</span>
+                                  </a>
+                                  <!-- item-->
+                                  <a href="javascript:void(0);" class="dropdown-item notify-item currency-img" title="Korea" data-title="KRW한국원화" data-img="{% static 'images/flags/kr.svg'%}" data-currency="krw">
+                                    <img src="{% static 'images/flags/kr.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <span class="align-middle">KRW한국원화</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul id="tmallglobal-tablist" class="nav nav-tabs-custom border-bottom-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body active fw-semibold" data-bs-toggle="tab" href="#saleTab" role="tab" aria-selected="true">
+                        매출
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#channelTab" role="tab" aria-selected="false" tabindex="-1">
+                        채널 수익
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#customerTab" role="tab" aria-selected="false" tabindex="-1">
+                        고객 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#funnelTab" role="tab" aria-selected="false" tabindex="-1">
+                        퍼널 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#priceTab" role="tab" aria-selected="false" tabindex="-1">
+                        가격 분석
+                      </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link text-body fw-semibold" data-bs-toggle="tab" href="#competeTab" role="tab" aria-selected="false" tabindex="-1">
+                        경쟁사 분석
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end card body -->
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="tab-content text-muted">
+              <div class="tab-pane fade show active" id="saleTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/sale.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/sale.html" %}
+                {% else %}
+                  {% include "dashboards/common/tabs/sale.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="channelTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/channel.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/channel.html" %}
+                {% else %}
+                  {% include "dashboards/common/tabs/channel.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="customerTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/customer.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/customer.html" %}
+                {% else %}
+                  {% include "dashboards/common/tabs/customer.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="funnelTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/funnel.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/funnel.html" %}
+                {% else %}
+                  {% include "dashboards/common/tabs/funnel.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="priceTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/price.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/price.html" %}
+                {% else %}
+                  {% include "dashboards/common/tabs/price.html" %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade show" id="competeTab" role="tabpanel">
+                {% if pageInfo.basePath|add:"/tabs/compete.html"|file_exists %}
+                  {% include pageInfo.basePath|add:"/tabs/compete.html" %}
+                {% else %}
+                  {% include "dashboards/common/tabs/compete.html" %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+
+        <!-- Grids in modals -->
+        <div class="modal fade" id="exampleModalgrid" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div id="grid-table"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="saveButton">엑셀 다운로드</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+      </div>
+      <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+  </div>
+  <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/sale.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/sale.js' %}"></script>
+
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/sale.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/channel.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/channel.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/channel.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/customer.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/customer.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/customer.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/funnel.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/funnel.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/funnel.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/price.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/price.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/price.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/marketing.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/marketing.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/marketing.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/live.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/live.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/live.js' %}"></script>
+  {% endif %}
+  {% if 'js/'|add:pageInfo.basePath|add:'/tabs/compete.js'|static_file_exists %}
+      <script src="{% static 'js/'|add:pageInfo.basePath|add:'/tabs/compete.js' %}"></script>
+  {% else %}
+      <script src="{% static 'js/dashboards/common/tabs/compete.js' %}"></script>
+  {% endif %}  
+  
+  <script>
+    window.onload = function () {
+      setTimeout(function () {
+        window.scrollTo(0, 0);
+        // 매출 탭 이벤트 적용
+        let initData = "{{initData|safe}}";
+        let jsonData = JSON.parse(initData.replace(/'/g, "\""));
+
+        sale.onLoadEvent(jsonData);
+
+        const ul = document.querySelector('#tmallglobal-tablist');
+        const d_vr = document.querySelector('#d_vr');
+        const d_dropdown = document.querySelector('#d_dropdown');
+        const tabList = ul.querySelectorAll('[role="tab"]');
+
+        tabList.forEach(function (tab) {
+          const href = tab.getAttribute("href");
+
+          tab.addEventListener('click', function (e) {
+
+            d_vr.style.visibility = "visible";
+            d_dropdown.style.visibility = "visible";
+        
+            if (href.includes("saleTab")) {
+              if (!sale.onloadStatus) {
+                sale.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("channelTab")) {
+
+              d_vr.style.visibility = "hidden";
+              d_dropdown.style.visibility = "hidden";
+
+              if (!chan.onloadStatus) {
+                chan.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("customerTab")) {
+              if (!cust.onloadStatus) {
+                cust.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("funnelTab")) {
+              if (!funnel.onloadStatus) {
+                funnel.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("priceTab")) {
+              if (!price.onloadStatus) {
+                price.onLoadEvent(jsonData);
+              }
+            } else if (href.includes("competeTab")) {
+              if (!compete.onloadStatus) {
+                compete.onLoadEvent(jsonData);
+              }
+            }
+          });
+        });
+
+      }, 100);
+    };
+
+    //////////////////////////////////
+    let currencyImg = document.getElementsByClassName("currency-img");
+    if (currencyImg) {
+      Array.from(currencyImg).forEach(function (t) {
+        t.addEventListener("click", function (e) {
+          document.getElementById("selected-currency-img").src = t.getAttribute("data-img");
+          document.getElementById("selected-currency-title").innerText = t.getAttribute("data-title");
+          document.getElementById("selected-currency-img").dataset.currency = t.getAttribute("data-currency");
+          /* currency 변경에 따른 이벤트 처리 */
+          let currentTab = document.querySelector('.active').getAttribute("href");
+          if (currentTab.includes("saleTab")) {
+            sale.setDataBinding();
+          } else if (currentTab.includes("channelTab")) {
+            chan.setDataBinding();
+          } else if (currentTab.includes("customerTab")) {
+            cust.setDataBinding();
+          } else if (currentTab.includes("funnelTab")) {
+            funnel.setDataBinding();
+          } else if (currentTab.includes("priceTab")) {
+            price.setDataBinding();
+          } else if (currentTab.includes("competeTab")) {
+            compete.setDataBinding();
+          }
+        });
+      });
+    }
+    //////////////////////////////////
+  </script>
+{% endblock extra_js %}

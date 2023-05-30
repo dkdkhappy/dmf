@@ -1,0 +1,222 @@
+<div class="row">
+  <div class="col-xxl-3 col-sm-6">
+    <div class="card card-animate g-height-140px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당해 누적 매출 <span class="text-muted">{{initData.channel_base_mnth}}</span>
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.revenueCardTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx bx-won fs-17 me-2 fw-bold fix-won"></i>
+            <span id="revn_amt" class="counter-value" data-target="">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="revn_rate_arrow" class="align-middle"></i>
+              <span id="revn_rate">0</span>
+            </span>
+            <span class="text-muted">전년 동기 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="revenueCount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-3 col-sm-6">
+    <div class="card card-animate g-height-140px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당해 누적 COGS <span class="text-muted">{{initData.channel_base_mnth}}</span>
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.cogsCardTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx bx-won fs-17 me-2 fw-bold fix-won"></i>
+            <span id="cogs_amt" class="counter-value" data-target="">0</span>
+          </h5>
+          <h5 class="fs-14 text-muted" style="margin-left: 10%;">
+            매출 대비 <span id="gogs_revn_rate">0</span>
+          </h5>
+          <!-- <h6 class="d-flex fs-12 align-items-flex-start text-black-50">
+            매출대비<span style="margin-left: 1%;">0</span> %
+          </h6> -->
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="cogs_rate_arrow" class="align-middle"></i>
+              <span id="cogs_rate">0</span>
+            </span>
+            <span class="text-muted">전년 동기 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="cogsCount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-3 col-sm-6 z-index-1">
+    <div class="card card-animate g-height-140px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당해 누적 Gross Profit<span class="text-muted">{{initData.channel_base_mnth}}</span>
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.gpCardTooltip|safe}}></button>
+          </h6>
+          <h5 class="d-flex align-items-flex-start">
+            <i class="bx bx-won fs-17 me-2 fw-bold fix-won"></i>
+            <span id="gp_amt" class="counter-value" data-target="">0</span>
+          </h5>
+          <h5 class="fs-14 text-muted" style="margin-left: 10%;">
+            매출 대비 <span id="gp_revn_rate">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="gp_rate_arrow" class="align-middle"></i>
+              <span id="gp_rate">0</span>
+            </span>
+            <span class="text-muted">전년 동기 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="grossProfitCount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-3 col-sm-6">
+    <div class="card card-animate g-height-140px">
+      <div class="d-flex">
+        <div class="flex-grow-1 p-3">
+          <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당해 누적 Contribution Margin<span class="text-muted">{{initData.channel_base_mnth}}</span>
+            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.cmCardTooltip|safe}}></button>
+          </h6>
+          <h5 class="fs-17" class="d-flex align-items-flex-start">
+            <i class="bx bx-won fs-17 me-2 fw-bold fix-won"></i>
+            <span id="cm_amt" class="counter-value" data-target="">0</span>
+          </h5>
+          <h5 class="fs-14 text-muted" style="margin-left: 10%;">
+            매출 대비 <span id="cm_revn_rate">0</span>
+          </h5>
+          <p class="mb-0">
+            <span class="badge bg-light mb-0">
+              <i id="cm_rate_arrow" class="align-middle"></i>
+              <span id="cm_rate">0</span>
+            </span>
+            <span class="text-muted">전년 동기 대비</span>
+          </p>
+        </div>
+        <div>
+          <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="contriMarginCount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+<div class="row">
+  <div class="col-xxl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">Contribution Margin Waterfall Chart
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.wfChartTooltip|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="waterFallChartDate" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-water-fall-channel" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-sm-6 col-md-8 col-xl-6 col-xxl-7">
+            <h4 class="card-title mb-0 d-flex align-items-center">Contribution Margin 월별 트렌드 분석
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.cmTrendTotal|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-6 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="monthTrendChartDate" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-mix-channel" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xxl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-4">
+            <h4 class="card-title mb-0 d-flex align-items-center">비용 항목 별 월별 트렌드 분석
+              <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.cmTrendbyCost|safe}}></button>
+            </h4>
+          </div>
+          <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-3">
+            <select class="form-control" id="choicesCmTrendSelect">
+              <option value="">비용 선택</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="expenseTrendChartDate" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-mix-cm-trend" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xxl-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="row g-3 align-items-center">
+          <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-4">
+            <div class="d-flex align-items-center">
+              <h4 class="card-title mb-0 d-flex align-items-center">비용 항목 별 Breakdown
+                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.costBreakDownTooltip|safe}}></button>
+              </h4>
+            </div>
+          </div>
+          <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-3" style="text-align: right;">
+            <button type="button" class="btn error btn-soft-primary btn-sm">금액</button>
+          <button type="button" class="btn nomal btn-soft-success btn-sm">100%</button>
+          </div>
+          <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-5">
+            <div class="input-group">
+              <input type="text" class="form-control text-muted flatpickr-input active" id="expenseBreakdownDate" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <!--그래프-->
+        <div id="chart-stack-break-down" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+      </div>
+    </div>
+  </div>
+</div>

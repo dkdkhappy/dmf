@@ -1,0 +1,15 @@
+/* 당해 연도 월/주차 SQL */
+WITH WT_WHERE AS
+    (
+        SELECT FRST_DT_YEAR             AS FR_DT  /* 기준일의  1월  1일 */
+              ,BASE_YEAR    ||'-12-31'  AS TO_DT  /* 기준일의 12월 31일 */
+          FROM DASH.DASH_INITIAL_DATE
+    ), WT_DATE AS
+    (
+        SELECT GENERATE_SERIES((SELECT CAST(FR_DT AS DATE) FROM WT_WHERE), (SELECT CAST(TO_DT AS DATE) FROM WT_WHERE), INTERVAL '1 WEEK') AS DT 
+    )
+    SELECT TO_CHAR(A.DT, 'MM')||'월' AS COL_MNTH
+          ,TO_CHAR(A.DT, 'WW')||'주' AS COL_WEEK
+      FROM WT_DATE A
+     WHERE TO_CHAR(A.DT, 'YYYY-MM') = TO_CHAR(DATE_TRUNC('MONTH', A.DT), 'YYYY-MM')
+  ORDER BY A.DT 

@@ -1,0 +1,732 @@
+<div class="row">
+    <div class="col-xxl-9">
+        <div class="row">
+            <div class="col-xxl-4 col-sm-6">
+                <div class="card card-animate g-height-110px">
+                    <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center">기준일 매출
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarBfrSale|safe}}></button>
+                            </h6>
+                            <h5 class="d-flex align-items-flex-start">
+                                <i class="bx bx-yen fs-17 me-2 fw-bold"></i>
+                                <span id="sale_amt" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="mb-0">
+                                <span class="badge bg-light mb-0">
+                                    <i id="sale_rate_day_yoy_arrow" class="align-middle"></i>
+                                    <span id="sale_rate_day_yoy">0</span>
+                                </span>
+                                <span class="text-muted">기준일 전일 대비</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart1"></div>
+                        </div>
+                    </div>
+                    <!-- end flex -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+            <div class="col-xxl-4 col-sm-6">
+                <div class="card card-animate g-height-110px">
+                    <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당월 누적 매출 <span class="text-muted">{{initData.base_mnth}}</span>
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarMonthlySale|safe}}></button>
+                            </h6>
+                            <h5 class="d-flex align-items-flex-start">
+                                <i class="bx bx bx-yen fs-17 me-2 fw-bold"></i>
+                                <span id="sale_amt_mnth" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="mb-0">
+                                <span class="badge bg-light mb-0">
+                                    <i id="sale_rate_mnth_yoy_arrow" class="align-middle"></i>
+                                    <span id="sale_rate_mnth_yoy">0</span>
+                                </span>
+                                <span class="text-muted">전년 동월 대비</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart2"></div>
+                        </div>
+                    </div>
+                    <!-- end flex -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+            <div class="col-xxl-4 col-sm-6">
+                <div class="card card-animate g-height-110px">
+                    <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당해 누적 매출 <span class="text-muted">{{initData.base_year}}</span>
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarAnnualSale|safe}}></button>
+                            </h6>
+                            <h5 class="d-flex align-items-flex-start">
+                                <i class="bx bx bx-yen fs-17 me-2 fw-bold"></i>
+                                <span id="sale_amt_year" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="mb-0">
+                                <span class="badge bg-light mb-0">
+                                    <i id="sale_rate_year_yoy_arrow" class="align-middle"></i>
+                                    <span id="sale_rate_year_yoy">0</span>
+                                </span>
+                                <span class="text-muted">전년도 누적 대비</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart3"></div>
+                        </div>
+                    </div>
+                    <!-- end flex -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+            <div class="col-xxl-4 col-sm-6">
+                <div class="card card-animate g-height-110px">
+                    <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">기준일 환불 금액
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarBfrRefund|safe}}></button>
+                            </h6>
+                            <h5 class="d-flex align-items-flex-start">
+                                <i class="bx bx bx-yen fs-17 me-2 fw-bold"></i>
+                                <span id="refd_amt" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="mb-0">
+                                <span class="badge bg-light mb-0">
+                                    <i id="refd_rate_day_yoy_arrow" class="align-middle"></i>
+                                    <span id="refd_rate_day_yoy">0</span>
+                                </span>
+                                <span class="text-muted">기준일 전일 대비</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart4"></div>
+                        </div>
+                    </div>
+                    <!-- end flex -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+            <div class="col-xxl-4 col-sm-6">
+                <div class="card card-animate g-height-110px">
+                    <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당월 누적 환불 금액 <span class="text-muted">{{initData.base_mnth}}</span>
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarMonthlyRefund|safe}}></button>
+                            </h6>
+                            <h5 class="d-flex align-items-flex-start">
+                                <i class="bx bx bx-yen fs-17 me-2 fw-bold"></i>
+                                <span id="refd_amt_mnth" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="mb-0">
+                                <span class="badge bg-light mb-0">
+                                    <i id="refd_rate_mnth_yoy_arrow" class="align-middle"></i>
+                                    <span id="refd_rate_mnth_yoy">0</span>
+                                </span>
+                                <span class="text-muted">전년 동월 대비</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart5"></div>
+                        </div>
+                    </div>
+                    <!-- end flex -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+            <div class="col-xxl-4 col-sm-6">
+                <div class="card card-animate g-height-110px">
+                    <div class="d-flex">
+                        <div class="flex-grow-1 p-3">
+                            <h6 class="mb-2 fs-14 d-flex align-items-center card-sub-title">당해 누적 환불 금액 <span class="text-muted">{{initData.base_year}}</span>
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarAnnualRefund|safe}}></button>
+                            </h6>
+                            <h5 class="d-flex align-items-flex-start">
+                                <i class="bx bx bx-yen fs-17 me-2 fw-bold"></i>
+                                <span id="refd_amt_year" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="mb-0">
+                                <span class="badge bg-light mb-0">
+                                    <i id="refd_rate_year_yoy_arrow" class="align-middle"></i>
+                                    <span id="refd_rate_year_yoy">0</span>
+                                </span>
+                                <span class="text-muted">전년도 누적 대비</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="areaChart6"></div>
+                        </div>
+                    </div>
+                    <!-- end flex -->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row(부분) -->
+    </div>
+    <!-- end col(전체) -->
+    <div class="col-xxl-3">
+        <div class="card card-animate overflow-hidden">
+            <div class="card-body" style="z-index:1 ;">
+                <div class="d-flex align-items-center">
+                    <h6 class="mb-2 fs-14 d-flex align-items-center">당해 Target 대비 누적 매출
+                        <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarytargetSaleTooltip|safe}}></button>
+                    </h6>
+                    <div class="flex-shrink-0">
+                        <div id="summary_progress_radial" data-colors='["--vz-success","--vz-heading-color"]' class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <div id="chart-radial-target" style="height: 164px;"></div>
+                <!-- end flex -->
+                <h5 class="mb-0 d-flex justify-content-center">
+                    <i class="bx bx bx-won fs-18 me-2 fw-bold fix-won"></i>
+                    <span id="revn_tagt_amt" class="counter-value" data-target="">0</span>
+                </h5>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<!-- end row -->
+<div class="row">
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate overflow-hidden g-height-110px">
+            <div class="position-absolute start-0" style="z-index: 0;">
+                <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                    <style>
+                    .s0 {
+                        opacity: 0.05;
+                        fill: var(--vz-secondary);
+                    }
+                    </style>
+                    <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                </svg>
+            </div>
+            <div class="card-body" style="z-index:1 ;">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="mb-3 fs-14 d-flex align-items-center">Tmall 내륙 매출 순위
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryTmallChinaRank|safe}}></button>
+                        </h6>
+                        <h5 class="fs-14 mb-0">
+                            <i id="dct_rank_tot_diff_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                            <!-- 230222 양윤지 : 추가 클래스 -->
+                            <!-- 1. plus_mark : [ + ] 기호 -->
+                            <!-- 2. minus_mark : [ - ] 기호 -->
+                            <span id="dct_rank_tot_diff" class="">0</span>
+                        </h5>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="dashboards_rank_image">
+                            <h1><span id="dct_rank_tot" class="">1</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- end flex -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate overflow-hidden g-height-110px">
+            <div class="position-absolute start-0" style="z-index: 0;">
+                <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                    <style>
+                    .s0 {
+                        opacity: 0.05;
+                        fill: var(--vz-secondary);
+                    }
+                    </style>
+                    <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                </svg>
+            </div>
+            <div class="card-body" style="z-index:1 ;">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="mb-3 fs-14 d-flex align-items-center">Tmall 글로벌 매출 순위
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryTmallGlobalRank|safe}}></button>
+                        </h6>
+                        <h5 class="fs-14 mb-0">
+                            <i id="dgt_rank_tot_diff_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                            <!-- 230222 양윤지 : 추가 클래스 -->
+                            <!-- 1. plus_mark : [ + ] 기호 -->
+                            <!-- 2. minus_mark : [ - ] 기호 -->
+                            <span id="dgt_rank_tot_diff" class="">0</span>
+                        </h5>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="dashboards_rank_image">
+                            <h1><span id="dgt_rank_tot" class="">1</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- end flex -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate overflow-hidden g-height-110px">
+            <div class="position-absolute start-0" style="z-index: 0;">
+                <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                    <style>
+                    .s0 {
+                        opacity: 0.05;
+                        fill: var(--vz-secondary);
+                    }
+                    </style>
+                    <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                </svg>
+            </div>
+            <div class="card-body" style="z-index:1 ;">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="mb-3 fs-14 d-flex align-items-center">Douyin 내륙 매출 순위
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryDouyinChinaRank|safe}}></button>
+                        </h6>
+                        <h5 class="fs-14 mb-0">
+                            <i id="dcd_rank_tot_diff_arrow" class="fs-13 align-middle"></i>
+                            <!-- 230222 양윤지 : 추가 클래스 -->
+                            <!-- 1. plus_mark : [ + ] 기호 -->
+                            <!-- 2. minus_mark : [ - ] 기호 -->
+                            <span id="dcd_rank_tot_diff" class="">0</span>
+                        </h5>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="dashboards_rank_image">
+                            <h1><span id="dcd_rank_tot" class="">1</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- end flex -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate overflow-hidden g-height-110px">
+            <div class="position-absolute start-0" style="z-index: 0;">
+                <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 120" width="200" height="120">
+                    <style>
+                    .s0 {
+                        opacity: 0.05;
+                        fill: var(--vz-secondary);
+                    }
+                    </style>
+                    <path id="Shape 8" class="s0" d="m189.5-25.8c0 0 20.1 46.2-26.7 71.4 0 0-60 15.4-62.3 65.3-2.2 49.8-50.6 59.3-57.8 61.5-7.2 2.3-60.8 0-60.8 0l-11.9-199.4z"/>
+                </svg>
+            </div>
+            <div class="card-body" style="z-index:1 ;">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <h6 class="mb-3 fs-14 d-flex align-items-center">Doyuin 글로벌 매출 순위
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryDouyinGlobalRank|safe}}></button>
+                        </h6>
+                        <h5 class="fs-14 mb-0">
+                            <i id="dgd_rank_tot_diff_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                            <!-- 230222 양윤지 : 추가 클래스 -->
+                            <!-- 1. plus_mark : [ + ] 기호 -->
+                            <!-- 2. minus_mark : [ - ] 기호 -->
+                            <span id="dgd_rank_tot_diff" class="">0</span>
+                        </h5>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="dashboards_rank_image">
+                            <h1><span id="dgd_rank_tot" class="">1</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- end flex -->
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h4 class="card-title mb-0 d-flex align-items-center">매출 정보에 대한 시계열 / 데이터 뷰어
+                        <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarysaleTimeSeriesDviewTooltip|safe}}></button>
+                        </h4>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                        <input type="text" class="form-control text-muted flatpickr-input active" id="salesTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-header p-0 border-0 bg-soft-light">
+                <div class="row g-0 text-center">
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                        <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                            <i class="bx bx bx-yen me-2 fw-bold"></i>
+                            <span id="time_series_sale_amt" class="counter-value" data-target="">0</span>
+                        </h5>
+                        <p class="text-muted mb-0">당해 누적 매출</p>
+                        </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                        <h5 class="mb-1">
+                            <i class="bx bx bx-yen me-2 fw-bold"></i>
+                            <span id="time_series_sale_amt_yoy" class="counter-value" data-target="">0</span></h5>
+                        <p class="text-muted mb-0">전년도 누적 매출</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0 border-end-0">
+                        <h5 class="mb-1">
+                            <i id="time_series_sale_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                            <!-- 230222 양윤지 : 추가 클래스 -->
+                            <!-- 1. plus_mark : [ + ] 기호 -->
+                            <!-- 2. minus_mark : [ - ] 기호 -->
+                            <span id="time_series_sale_rate" class="counter-value" data-target="">0</span><span>%</span>
+                        </h5>
+                        <p class="text-muted mb-0">증감률</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <!--그래프-->
+                <div id="chart-line-sales" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+            <div class="mt-1 card-footer g-min-height-xl-242px">
+                <div id="saleInfoList" class="table-card"></div>
+            </div>
+            <!-- end card footer -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row g-3 align-items-center">
+                    <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-7">
+                        <h6 class="card-title mb-0 d-flex align-items-center">채널별 매출 비중 Break Down
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummarysaleTimeSeriesRatil|safe}}></button>
+                        </h6>
+                    </div>
+                    <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+                        <button type="button" class="exponent1 btn error btn-soft-primary btn-sm btn-smy-sales">금액</button>
+                        <button type="button" class="percent1 btn nomal btn-soft-success btn-sm btn-smy-sales">100%</button>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="salesChannelSalesBreakDownViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <!--컨텐츠-->
+                <div id="chart-bar-channel-sales-break-down" class="e-charts" style="height: 450px;"></div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h4 class="card-title mb-0 d-flex align-items-center">환불 정보에 대한 시계열
+                        <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryRefundTimeSeriesDviewTooltip|safe}}></button>
+                        </h4>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="refundTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-header p-0 border-0 bg-soft-light">
+                <div class="row g-0 text-center">
+                    <div class="col-xxl-2 col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                                <i class="bx bx bx-yen me-2 fw-bold"></i>
+                                <span id="time_series_refund_amt" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">당해 누적 환불</p>
+                        </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-xxl-2 col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1">
+                                <i class="bx bx bx-yen me-2 fw-bold"></i>
+                                <span id="time_series_refund_amt_yoy" class="counter-value" data-target="">0</span></h5>
+                            <p class="text-muted mb-0">전년도 누적 환불</p>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1">
+                                <i id="time_series_refund_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                                <!-- 230222 양윤지 : 추가 클래스 -->
+                                <!-- 1. plus_mark : [ + ] 기호 -->
+                                <!-- 2. minus_mark : [ - ] 기호 -->
+                                <span id="time_series_refund_rate" class="counter-value" data-target="">0</span><span>%</span>
+                            </h5>
+                            <p class="text-muted mb-0">증감률</p>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                                <span id="time_series_pcnt_amt" class="counter-value" data-target="">0</span><span>%</span>
+                            </h5>
+                            <p class="text-muted mb-0">당해 매출 대비 환불 비중</p>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1">
+                                <span id="time_series_pcnt_amt_yoy" class="counter-value" data-target="">0</span><span>%</span>
+                            </h5>
+                            <p class="text-muted mb-0">전년도 매출 대비 환불 비중</p>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1">
+                                <i id="time_series_pcnt_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                                <span id="time_series_pcnt_rate" class="counter-value" data-target="">0</span><span>%</span>
+                            </h5>
+                            <p class="text-muted mb-0">증감률</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <!--그래프-->
+                <div id="chart-line-refuned" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+            <div class="mt-1 card-footer g-min-height-xl-242px">
+                <div id="refundInfoList" class="table-card"></div>
+            </div>
+            <!-- end card footer -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-12 col-md-8 col-xl-9 col-xxl-9">
+                        <h6 class="card-title mb-0 d-flex align-items-center">채널별 환불 비중 Break Down
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryRefundTimeSeriesRatil|safe}}></button>
+                        </h6>
+                    </div>
+                    <!-- <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+                        <button type="button" class="exponent2 btn error btn-soft-primary btn-sm btn-smy-sales">금액</button>
+                        <button type="button" class="percent2 btn nomal btn-soft-success btn-sm btn-smy-sales">100%</button>
+                    </div> -->
+                    <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="channelRefundBreakDownViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <!--컨텐츠-->
+                <div id="chart-bar-channel-refund-break-down" class="e-charts" style="height: 450px;"></div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">채널별 브랜드 등수
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryBrandRank|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body border-bottom">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-xxl-3 col-sm-3">
+                            <select class="form-control" data-plugin="choices" data-choices="data-choices" data-choices-search-false="data-choices-search-false" data-choices-sorting-false name="countryName" id="sbxSalesChannelName">
+                                <option value="Tmall" selected="selected">Tmall</option>
+                                <option value="Douyin">Douyin</option>
+                            </select>
+                        </div>
+                        <div class="col-xxl-9 col-sm-9">
+                            <div class="search-box">
+                                <select class="form-control" id="channelSalesRankingTop300Brand" multiple="multiple">
+                                    <option>전체</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-xxl-3 col-sm-3">
+                            <select class="form-control" name="isMulti" id="channelSalesRankingTop300IsMulti">
+                                <option value="%" selected="selected">전체</option>
+                                <option value="N">화장품 전문몰 제외</option>
+                            </select>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-xxl-3 col-sm-3">
+                            <select class="form-control" data-plugin="choices" data-choices="data-choices" data-choices-search-false="data-choices-search-false" name="countryName" id="channelSalesRankingTop300CountryName">
+                                <option value="%" selected="selected">전체</option>
+                                <option value="Y">한국</option>
+                            </select>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-xxl-3 col-sm-3">
+                            <select class="form-control" name="isDerma" id="channelSalesRankingTop300IsDerma">
+                                <option value="%" selected="selected">전체</option>
+                                <option value="Y">더마</option>
+                                <option value="N">더마 외</option>
+                            </select>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-xxl-3 col-sm-3">
+                            <button type="button" class="btn btn-primary w-100" onclick="sale.searchData();">검색</button>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!--end row-->
+                </form>
+                <!-- end form -->
+            </div>
+            <!-- end card body -->
+            <div class="card-body">
+                <div id="channelList" class="table-card"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">TOP5 매출 상품
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryTop5SaleProd|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="top5SaleList" class="table-card"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- <div class="row">
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">TOP5 환불 제품 (환불 기준)
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="top5RefundList" class="table-card"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">TOP5 환불 제품 (매출 대비 환불 기준)
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="안내 문구를 입력 해 주세요."></button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="top5SalesRefundList" class="table-card"></div>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,527 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Tmall 방문자 수 정보에 대한 시계열 데이터 뷰어
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryTMALLCustomerTS|safe}}></button>
+                        </h4>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="tmallVisitorTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-header p-0 border-0 bg-soft-light">
+                <div class="row g-0 text-center">
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                                <i class="bx bx me-2 fw-bold"></i>
+                                <span id="tmall_time_series_vist_cnt" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">당해 누적 방문자 수</p>
+                        </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1">
+                                <i class="bx bx me-2 fw-bold"></i>
+                                <span id="tmall_time_series_vist_cnt_yoy" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">전년도 누적 방문자 수</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0 border-end-0">
+                            <h5 class="mb-1">
+                                <i id="tmall_time_series_visit_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                                <span id="tmall_time_series_visit_rate" class="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">증감률</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="chart-line-tmall-visit" style="height: 400px;" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+            <div class="mt-1 card-footer g-min-height-xl-242px">
+                <div id="tmallVisitCountList" class="table-card"></div>
+            </div>
+            <!-- end card footer -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row g-3 align-items-center">
+                    <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-7">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Tmall 방문자 수 Break Down
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryTMALLCustomerBreakDown|safe}}></button>
+                        </h4>
+                    </div>
+                    <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+                        <button type="button" class="dscv1 btn error btn-soft-primary btn-sm btn-smy-cust">방문자</button>
+                        <button type="button" class="dscp1 btn nomal btn-soft-success btn-sm btn-smy-cust">100%</button>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="tmallVisitBreakDownFlatpickr" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <!--그래프-->
+                <div id="chart-stack-tmall-visit" style="height: 579px;" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Douyin 방문자 수 정보에 대한 시계열 데이터 뷰어
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryDYCustomerTS|safe}}></button>
+                        </h4>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="douyinVisitorTimeSeriesViewer" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-header p-0 border-0 bg-soft-light">
+                <div class="row g-0 text-center">
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1 d-flex align-items-flex-start justify-content-center">
+                                <i class="bx bx me-2 fw-bold"></i>
+                                <span id="douyin_time_series_vist_cnt" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">당해 누적 방문자 수</p>
+                        </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0">
+                            <h5 class="mb-1">
+                                <i class="bx bx me-2 fw-bold"></i>
+                                <span id="douyin_time_series_vist_cnt_yoy" class="counter-value" data-target="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">전년도 누적 방문자 수</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-4">
+                        <div class="p-3 h-100 border border-dashed border-start-0 border-end-0">
+                            <h5 class="mb-1">
+                                <i id="douyin_time_series_visit_arrow" class="ri-arrow-up-line fs-13 align-middle"></i>
+                                <span id="douyin_time_series_visit_rate" class="">0</span>
+                            </h5>
+                            <p class="text-muted mb-0">증감률</p>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="chart-line-douyin-visit" style="height: 400px;" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+            <div class="mt-1 card-footer g-min-height-xl-242px">
+                <div id="douyinVisitCountList" class="table-card"></div>
+            </div>
+            <!-- end card footer -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row g-3 align-items-center">
+                    <div class="col-7 col-sm-6 col-md-6 col-xl-7 col-xxl-7">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Douyin 방문자 수 Break Down
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryDYCustomerBreakDown|safe}}></button>
+                        </h4>
+                    </div>
+                    <div class="col-5 col-sm-6 col-md-2 col-xl-2 col-xxl-2" style="text-align: right;">
+                        <button type="button" class="dscv2 btn error btn-soft-primary btn-sm btn-smy-cust">방문자</button>
+                        <button type="button" class="dscp2 btn nomal btn-soft-success btn-sm btn-smy-cust">100%</button>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="douyinVisitBreakDownFlatpickr" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <!--그래프-->
+                <div id="chart-stack-douyin-visit" style="height: 579px;" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h4 class="card-title mb-0 d-flex align-items-center">티몰 지표별 Break Down
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryTmallIndicatorBreakDown|safe}}></button>
+                        </h4>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="tmallTableBreakDown" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body border-bottom">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-xxl-9 col-md-9 col-sm-9">
+                            <select class="form-control" id="tamll_type">
+                            </select>
+                        </div>
+                        <div class="col-xxl-3 col-md-3 col-sm-3">
+                            <div>
+                                <button type="button" class="btn btn-primary w-100" onclick="cust.channelBreakDownTmallChartSearch();">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row-->
+                </form>
+            </div>
+            <!-- end card body -->
+              <div class="card-body">
+                <div id="chart-line-tmall-table-break-down" class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-sm-6 col-md-8 col-xl-9 col-xxl-9">
+                        <h4 class="card-title mb-0 d-flex align-items-center">도우인 지표별 Break Down
+                            <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryDYIndicatorBreakDown|safe}}></button>
+                        </h4>
+                    </div>
+                    <!-- end col -->
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 col-xxl-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control text-muted flatpickr-input active" id="douyinTableBreakDown" data-provider="flatpickr" data-range-date="true" data-date-format="Y-m-d" data-deafult-date="" placeholder="조회 기간을 선택하세요." readonly="readonly">
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body border-bottom">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-xxl-9 col-md-9 col-sm-9">
+                            <select class="form-control" id="douyin_type">
+                            </select>
+                        </div>
+                        <div class="col-xxl-3 col-md-3 col-sm-3">
+                            <div>
+                                <button type="button" class="btn btn-primary w-100" onclick="cust.channelBreakDownDouyinChartSearch();">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row-->
+                </form>
+            </div>
+            <!-- end card body -->
+            <div class="card-body">
+                <div id="chart-line-douyin-table-break-down" class="e-charts"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">방문자 지역 분포
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryRegionSum|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <div id="summary-chart-map" class="e-charts" style="height:600px;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">방문자 지역 등급별 데이터 뷰어
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryRegionTable|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="regiDistList" style="height: 632px;" class="table-card"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">방문자 성별 분포
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryGenderSum|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <div id="summary-chart-gender" class="e-charts"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">방문자 성별 데이터 뷰어
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryGenderTable|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="genderList" style="height: 382px;" class="table-card"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">Tmall 방문자 연령별 분포
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryAgeSum|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <div id="summary-chart-bar-age-tmall" class="e-charts" style="height: 467px;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">Douyin 방문자 연령별 분포
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryAgeSum|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <div id="summary-chart-bar-age-douyin" class="e-charts" style="height: 467px;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">Tmall 방문자 연령별 데이터 뷰어
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryAgeTable|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="ageListTmall" style="height: 499px;" class="table-card"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+    <div class="col-xxl-6">
+        <div class="card">
+            <div class="card-header align-items-center d-flex g-height-70px">
+                <div class="row g-4 align-items-center">
+                    <div class="col-sm">
+                        <div>
+                            <h5 class="card-title mb-0 d-flex align-items-center">Douyin 방문자 연령별 데이터 뷰어
+                                <button type="button" class="btn-question border-dark fs-10 text-muted" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title={{toolTips.SummaryAgeTable|safe}}></button>
+                            </h5>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end card header -->
+            <div class="card-body">
+                <div id="ageListDouyin" style="height: 499px;" class="table-card"></div>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<!-- end row -->

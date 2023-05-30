@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko" {% block html %} data-layout="horizontal" data-preloader="enabled" data-topbar="light" data-sidebar-size="lg" data-sidebar-image="none" {% endblock html %}>
+
+  <head>
+    <meta charset="utf-8"/>
+    <title>
+      DAP - Data Analysis Platform |
+      {% block title %}{% endblock title %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico'%}">
+
+    {% block css %}
+      {% block extra_css %}{% endblock extra_css %}
+
+      <!-- gridjs css -->
+      <link rel="stylesheet" href="{% static 'libs/gridjs/theme/mermaid.min.css' %}">
+      <link rel="stylesheet" href="{% static 'libs/flatpickr/plugins/monthSelect/style.css' %}">
+
+      <!-- Layout config Js -->
+      <script src="{% static 'js/layout.js'%}"></script>
+      <!-- Bootstrap Css -->
+      <link href="{% static 'css/bootstrap.min.css'%}" id="bootstrap-style" rel="stylesheet" type="text/css"/>
+      <!-- Icons Css -->
+      <link href="{% static 'css/icons.min.css'%}" rel="stylesheet" type="text/css"/>
+
+      <!-- Tippy Css -->
+      <link href="{% static 'libs/tippy.js/tippy.css'%}" id="tippy-style" rel="stylesheet" type="text/css"/>
+
+      <!-- jsvectormap css -->
+      <link href="{% static 'libs/jsvectormap/css/jsvectormap.min.css'%}" rel="stylesheet" type="text/css"/>
+
+      <!-- Sweet Alert css-->
+      <link href="{% static 'libs/sweetalert2/sweetalert2.min.css'%}" rel="stylesheet" type="text/css"/>
+
+      <!--Swiper slider css-->
+      <link href="{% static 'libs/swiper/swiper-bundle.min.css'%}" rel="stylesheet" type="text/css"/>
+
+      <!-- dropzone css -->
+      <link rel="stylesheet" href="{% static 'libs/dropzone/dropzone.css'%}" type="text/css"/>
+
+      <!-- Filepond css -->
+      <link rel="stylesheet" href="{% static 'libs/filepond/filepond.min.css'%}" type="text/css"/>
+      <link rel="stylesheet" href="{% static 'libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css'%}">
+
+      <!-- App Css-->
+      <link href="{% static 'css/app.min.css'%}" id="app-style" rel="stylesheet" type="text/css"/>
+      <!-- custom Css-->
+      <link href="{% static 'css/custom.min.css'%}" id="app-style" rel="stylesheet" type="text/css"/>
+
+    {% endblock css %}
+  </head>
+
+  <body>
+    <div id="layout-loading"></div>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+      {% block header %}
+        {% include "partials/topbar.html" %}
+      {% endblock header %}
+      {% block sidebar %}
+        {% include "partials/sidebar.html" %}
+      {% endblock sidebar %}
+      {% block content %}
+        {% block pagetitle %}{% endblock pagetitle %}
+        {% block footer %}{% endblock footer %}
+      {% endblock content %}
+    </div>
+
+    {% block extra_content %}{% endblock extra_content %}
+
+    <!-- removeNotificationModal -->
+    <div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="NotificationModalbtn-close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mt-2 text-center">
+              <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+              <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                <h4>Are you sure ?</h4>
+                <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
+              </div>
+            </div>
+            <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+              <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn w-sm btn-danger" id="delete-notification">Yes, Delete It!</button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!--preloader-->
+    <div id="preloader">
+      <div id="status">
+        <div class="spinner-border text-primary avatar-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- data-loading : 230215 양윤지 -->
+    <!-- <div id="data-loading"> <div class="spinner-border text-dark avatar-sm"></div> </div> -->
+
+    <!-- data-loading2 : 230222 양윤지 -->
+    <div id="data-loading">
+      <svg class="svg__loading" viewbox="0 0 311 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title></title>
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path d="M0,0 L0,119 L74.6161228,119 L74.6161228,0 L0,0 Z M78.7946257,0 L78.7946257,119 L153.410749,119 L153.410749,0 L78.7946257,0 Z M157.589251,0 L157.589251,119 L232.205374,119 L232.205374,0 L157.589251,0 Z M236.383877,0 L236.383877,119 L311,119 L311,0 L236.383877,0 Z" id="Rectangle-1-copy" fill="#FAFAFA"></path>
+          <rect class="svg__loading-new" x="0" y="74.618705" width="74.6161228" height="100%">
+            <animate id="animate__new-bar" attributename="y" from="74.618705" to="74.618705" begin="0s" dur="2s" values="74.618705; 0; 74.618705; 74.618705; 74.618705" keysplines=".75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99" keytimes="0; 0.25; 0.5; 0.75; 1" calcmode="spline" repeatcount="indefinite"/>
+          </rect>
+          <rect class="svg__loading-open" x="78.7946257" y="37" width="74.6161228" height="100%">
+            <animate id="animate__open-bar" attributename="y" from="37" to="37" begin="0.1s" dur="2s" values="37; 0; 37; 37; 37" keysplines=".75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99" keytimes="0; 0.25; 0.5; 0.75; 1" calcmode="spline" repeatcount="indefinite"/>
+          </rect>
+          <rect class="svg__loading-won" x="157.589251" y="57.3021583" width="74.6161228" height="100%">
+            <animate id="animate__won-bar" attributename="y" from="57.3021583" to="57.3021583" begin="0.2s" dur="2s" values="57.3021583; 0; 57.3021583; 57.3021583; 57.3021583" keysplines=".75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99" keytimes="0; 0.25; 0.5; 0.75; 1" calcmode="spline" repeatcount="indefinite"/>
+          </rect>
+          <rect class="svg__loading-lost" x="236.383877" y="97.3093525" width="74.6161228" height="100%">
+            <animate id="animate__lost-bar" attributename="y" from="97.3093525" to="97.3093525" begin="0.3s" dur="2s" values="97.3093525; 0; 97.3093525; 97.3093525; 97.3093525" keysplines=".75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99; .75 .06 .38 .99" keytimes="0; 0.25; 0.5; 0.75; 1" calcmode="spline" repeatcount="indefinite"/>
+          </rect>
+        </g>
+      </svg>
+    </div>
+
+    <!-- END layout-wrapper -->
+    {% block right_sidebar %}
+      {% include "partials/customizer.html" %}
+    {% endblock right_sidebar %}
+
+    {% block javascript %}
+
+      <script>
+        let language = {
+          search: {
+            placeholder: "검색..."
+          },
+          sort: {
+            sortAsc: "오름차순 정렬",
+            sortDesc: "내림차순 정렬"
+          },
+          pagination: {
+            previous: "이전",
+            next: "다음",
+            of: "전체",
+            to: "~",
+            showing: " ",
+            results: () => "건"
+          },
+          loading: "조회중입니다...",
+          noRecordsFound: "검색 결과가 없습니다.",
+          error: "오류가 발생했습니다."
+        };
+      </script>
+
+      <!-- JAVASCRIPT -->
+      <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+      <script src="{% static 'libs/@popperjs/core/umd/popper.min.js'%}"></script>
+      <script src="{% static 'libs/tippy.js/tippy.umd.min.js'%}"></script>
+      <script src="{% static 'libs/simplebar/simplebar.min.js'%}"></script>
+      <script src="{% static 'libs/node-waves/waves.min.js'%}"></script>
+      <script src="{% static 'libs/feather-icons/feather.min.js'%}"></script>
+      <script src="{% static 'js/pages/plugins/lord-icon-2.1.0.js'%}"></script>
+      <script src="{% static 'js/plugins.js'%}"></script>
+
+      <!-- 공통 js -->
+      <script src="{% static 'js/common.js'%}"></script>
+
+      <!-- echarts js -->
+      <script src="{% static 'libs/echarts/echarts.min.js' %}"></script>
+      <!-- echarts-wordcloud js -->
+      <script src="{% static 'libs/echarts-wordcloud/echarts-wordcloud.min.js' %}"></script>
+
+      <!-- apexcharts -->
+      <script src=" {% static 'libs/apexcharts/apexcharts.min.js'%} "></script>
+      
+      <!-- amcharts -->
+      <script src=" {% static 'js/amcharts/amcharts4/core.js'%} "></script>
+      <script src=" {% static 'js/amcharts/amcharts4/charts.js'%} "></script>
+      <script src=" {% static 'js/amcharts/amcharts4/themes/animated.js'%} "></script>
+
+      <!-- Vector map-->
+      <script src=" {% static 'libs/jsvectormap/js/jsvectormap.min.js'%}"></script>
+      <script src="{% static 'libs/jsvectormap/maps/world-merc.js'%}"></script>
+
+      <!-- dropzone min -->
+      <script src="{% static 'libs/dropzone/dropzone-min.js'%}"></script>
+
+      <!-- filepond js -->
+      <script src="{% static 'libs/filepond/filepond.min.js'%}"></script>
+      <script src="{% static 'libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js'%}"></script>
+      <script src="{% static 'libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js'%}"></script>
+      <script src="{% static 'libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js'%}"></script>
+      <script src="{% static 'libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js'%}"></script>
+
+      <!-- gridjs js -->
+      <script src="{% static 'libs/gridjs/gridjs.umd.js' %}"></script>
+
+      <!-- aos js -->
+      <script src="{% static 'libs/aos/aos.js' %}"></script>
+      <!-- prismjs plugin -->
+      <script src="{% static 'libs/prismjs/prism.js' %}"></script>
+      <!-- animation init -->
+      <script src="{% static 'js/pages/animation-aos.init.js' %}"></script>
+
+      <!-- Sweet Alerts js -->
+      <script src="{% static 'libs/sweetalert2/sweetalert2.min.js'%}"></script>
+
+      <!-- Sweet alert init js-->
+      <script src="{% static 'js/pages/sweetalerts.init.js'%}"></script>
+
+      <!-- FlatPicker ko locale js-->
+      <script src="{% static 'libs/flatpickr/l10n/ko.js' %}"></script>
+
+      <!-- xlsx js-->
+      <script src="{% static 'libs/xlsx/xlsx.core.min.js' %}"></script>
+
+      {% block extra_js %}{% endblock extra_js %}
+
+      <!-- App js -->
+      <script src="{% static 'js/app.js'%}"></script>
+
+    {% endblock javascript %}
+
+  </body>
+
+</html>

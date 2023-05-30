@@ -1,0 +1,408 @@
+/*
+Template Name: Velzon - Admin & Dashboard Template
+Author: Themesbrand
+Website: https://themesbrand.com/
+Contact: support@themesbrand.com
+File: Custom Css File
+*/
+
+/** global position **/
+.g-position-absolute {
+  position: absolute;
+}
+
+/** global margin **/
+.g-mt-minus-1 {
+  margin-top: -1px;
+}
+.g-mt-minus-2 {
+  margin-top: -2px;
+}
+.g-mt-minus-3 {
+  margin-top: -3px;
+}
+.g-mt-minus-4 {
+  margin-top: -4px;
+}
+.g-mt-minus-5 {
+  margin-top: -5px;
+}
+.g-mt-minus-15 {
+  margin-top: -15px;
+}
+
+@media (max-width: 1024px) {
+  .g-mt-profile-foreground {
+    margin-top: 1.5rem !important;
+  }
+  .g-mt-tab_menu-foreground {
+    margin-top: 0.1rem !important;
+  }
+}
+
+.g-ml-1 {
+  margin-left: 1px;
+}
+.g-ml-2 {
+  margin-left: 2px;
+}
+.g-ml-3 {
+  margin-left: 3px;
+}
+.g-ml-4 {
+  margin-left: 4px;
+}
+.g-ml-5 {
+  margin-left: 5px;
+}
+.g-ml-6 {
+  margin-left: 6px;
+}
+.g-ml-7 {
+  margin-left: 7px;
+}
+.g-ml-8 {
+  margin-left: 8px;
+}
+.g-ml-9 {
+  margin-left: 9px;
+}
+.g-ml-10 {
+  margin-left: 10px;
+}
+.g-ml-15 {
+  margin-left: 15px;
+}
+
+.g-float-left {
+  float: left;
+}
+.g-float-right {
+  float: right;
+}
+
+/** global height **/
+.g-height-10px {
+  height: 10px;
+}
+.g-height-20px {
+  height: 20px;
+}
+.g-height-30px {
+  height: 30px;
+}
+.g-height-40px {
+  height: 40px;
+}
+.g-height-50px {
+  height: 50px;
+}
+.g-height-60px {
+  height: 60px;
+}
+.g-height-70px {
+  height: 70px;
+}
+.g-height-80px {
+  height: 80px;
+}
+.g-height-90px {
+  height: 90px;
+}
+.g-height-100px {
+  height: 100px;
+}
+.g-height-110px {
+  height: 110px;
+}
+.g-height-120px {
+  height: 120px;
+}
+.g-height-130px {
+  height: 130px;
+}
+.g-height-140px {
+  height: 140px;
+}
+.g-height-150px {
+  height: 150px;
+}
+
+.g-min-height-100px {
+  min-height: 100px;
+}
+.g-min-height-110px {
+  min-height: 110px;
+}
+.g-min-height-120px {
+  min-height: 120px;
+}
+.g-min-height-130px {
+  min-height: 130px;
+}
+.g-min-height-140px {
+  min-height: 140px;
+}
+.g-min-height-150px {
+  min-height: 150px;
+}
+
+.z-index-1 {
+  z-index: 1;
+}
+
+@media (min-width: 1200px) {
+  .g-min-height-xl-220px {
+    min-height: 220px;
+  }
+  .g-min-height-xl-221px {
+    min-height: 221px;
+  }
+  .g-min-height-xl-222px {
+    min-height: 222px;
+  }
+  .g-min-height-xl-452px {
+    min-height: 452px;
+  }
+
+  .g-height-319px {
+    height: 319px;
+  }
+  .g-height-382px {
+    height: 382px;
+  }
+  .g-height-409px {
+    height: 409px;
+  }
+  .g-height-480px {
+    height: 480px;
+  }
+}
+
+/** badge **/
+[class*="tippy"] {
+  cursor: help;
+}
+
+.btn-question {
+  border: none;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.btn-question::after {
+  content: "?";
+  display: inline;
+}
+.btn-question:hover {
+  background-color: rgba(102, 145, 231, 0.18);
+}
+.custom-table.file-info > :not(caption) > * > th {
+  // padding: 0.9rem 0.6rem !important;
+}
+
+.custom-table.file-info > :not(caption) > * > td {
+  // padding: 1.07rem .6rem!important;
+  height: 68.07px;
+}
+
+.custom-table.file-info > :not(caption) > * > td:last-of-type {
+  padding: 1.23rem 0.6rem !important;
+}
+
+.custom-table > thead > tr > th {
+  height: 44.63px;
+}
+
+#probDataList
+  > div
+  > div.gridjs-wrapper
+  > table
+  > tbody
+  > tr
+  > td.gridjs-notfound {
+  height: 315px;
+}
+
+.dashboards_rank_image::before {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 80px;
+  background-image: url("/static/images/dashboards/rank.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  // fill: var(--vz-heading-color);
+  filter: opacity(0.2) drop-shadow(0 0 0 gold);
+}
+
+.dashboards_rank_image > h1 {
+  position: absolute;
+  font-size: 22px;
+  top: 38px;
+  width: 90px;
+  text-align: center;
+}
+
+.card .card-sub-title span {
+  font-size: 12px;
+  font-weight: 400;
+  padding-left: 8px;
+}
+
+// data-loading : 230215 양윤지
+// #data-loading {
+//   position: fixed;
+//   visibility: hidden;
+//   width: 100%;
+//   height: 100vh;
+//   display: block;
+//   background: #0000004f;
+//   z-index: 99998888888;
+//   top: 0;
+//   left: 0;
+// }
+
+// #data-loading div {
+//   position: absolute;
+//   left: 50%;
+//   top: 50%;
+// }
+
+// 230217 양윤지
+.tab-content {
+  > .tab-pane {
+    overflow: hidden;
+    height: 0;
+    display: block;
+  }
+  > .active {
+    overflow: initial;
+    height: 0;
+    display: block;
+  }
+}
+
+#loading-bar-custom {
+  background-color: #ffffff49;
+  z-index: 9999999999;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// 230220 양윤지 : 월 선택 숨기기
+#last_year_month1,
+#last_year_month2,
+#last_year_month_vist,
+#last_year_month_page,
+#last_year_month_vist_page,
+#last_year_month_buy_change,
+#last_year_month_store,
+#last_year_month_store2,
+#last_year_month_store3 {
+  display: none;
+}
+
+// 230222 양윤지 : 플러스 기호, 마이너스 기호 스타일 추가
+.plus_mark::before {
+  content: "+";
+  display: inline;
+}
+.minus_mark::before {
+  content: "-";
+  display: inline;
+}
+
+// 230222 양윤지 : 로딩바 추가
+.overflow-hidden {
+  overflow: hidden;
+}
+.svg__loading {
+  height: 5.4rem;
+  width: 100%;
+  top: 30%;
+  left: 0;
+  position: absolute;
+}
+
+.svg__loading-won {
+  fill: #7fcb9f;
+}
+
+.svg__loading-lost {
+  fill: #ea6d64;
+}
+
+.svg__loading-new {
+  fill: #86c1f4;
+}
+
+.svg__loading-open {
+  fill: #f4ba6f;
+}
+
+#data-loading {
+  position: fixed;
+  visibility: hidden;
+  width: 100%;
+  height: 70%;
+  text-align: center;
+  background-color: #f2f5f84f;
+  z-index: 999999;
+  bottom: 0;
+  left: 0;
+}
+
+@-webkit-keyframes ellipsis {
+  0% {
+    width: 0.25em;
+  }
+
+  50% {
+    width: 0.6em;
+  }
+
+  100% {
+    width: 1em;
+  }
+}
+
+/* 230223 */
+@media (max-width: 658px) {
+  #data-loading {
+    height: 67%;
+  }
+}
+
+@media (max-width: 658px) {
+  #data-loading {
+    height: 58%;
+  }
+}
+
+/* 230303 */
+.text-overflow {
+  text-overflow: ellipsis;
+  width: 240px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
+/* 230308 */
+.google-icon-style {
+  width: 80px;
+  opacity: 0.15;
+}

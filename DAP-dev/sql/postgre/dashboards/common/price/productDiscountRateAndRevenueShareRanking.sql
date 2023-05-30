@@ -1,0 +1,109 @@
+/* 8. 제품별 할인율 및 매출비중 순위 - 표 SQL */
+WITH WT_WHERE AS
+    (
+        SELECT CAST( {FR_DT} AS DATE) AS FR_DT  /* 사용자가 선택한 기간 - 시작일  ex) '2023-02-01'  */
+              ,CAST( {TO_DT} AS DATE) AS TO_DT  /* 사용자가 선택한 기간 - 종료일  ex) '2023-02-13'  */
+    ), WT_COPY AS
+    (
+        SELECT 1 AS DISC_RANK
+     UNION ALL
+        SELECT 2 AS DISC_RANK
+     UNION ALL
+        SELECT 3 AS DISC_RANK
+     UNION ALL
+        SELECT 4 AS DISC_RANK
+     UNION ALL
+        SELECT 5 AS DISC_RANK
+    ), WT_DISC_RMB AS
+    (
+        SELECT ITEM_NAME
+              ,SUM((1-((ALL_SALE_ITEM_AMOUNT_RMB / ALL_SALES_ITEM_QTY) / SALE_TAG_ITEM_PRICE_RMB)) * ALL_SALE_ITEM_AMOUNT_RMB) / SUM(ALL_SALE_ITEM_AMOUNT_RMB) * 100 AS DISC_RATE
+              ,COUNT(*) AS TOTAL_DAYS
+              ,COUNT(CASE WHEN ALL_SALE_ITEM_AMOUNT_RMB > 0 THEN 1 ELSE NULL END) AS DAYS_WITH_SALES
+          FROM DASH.{TAG}_PRICEANLAYSISITEMTIMESERIES
+         WHERE STATISTICS_DATE BETWEEN (SELECT FR_DT FROM WT_WHERE) AND (SELECT TO_DT FROM WT_WHERE)
+           AND SALE_TAG_ITEM_PRICE_RMB > 0
+           AND ITEM_NAME IS NOT NULL
+      GROUP BY ITEM_NAME
+        HAVING SUM(ALL_SALE_ITEM_AMOUNT_RMB) > 0 
+        AND (COUNT(CASE WHEN ALL_SALE_ITEM_AMOUNT_RMB > 0 THEN 1 ELSE NULL END) * 1.0 / (((SELECT TO_DT FROM WT_WHERE) - (SELECT FR_DT FROM WT_WHERE)) + 1) > 0.6)
+    ), WT_DISC_KRW AS
+    (
+        SELECT ITEM_NAME
+              ,SUM((1-((ALL_SALE_ITEM_AMOUNT_KRW / ALL_SALES_ITEM_QTY) / SALE_TAG_ITEM_PRICE_KRW)) * ALL_SALE_ITEM_AMOUNT_KRW) / SUM(ALL_SALE_ITEM_AMOUNT_KRW) * 100 AS DISC_RATE
+              ,COUNT(*) AS TOTAL_DAYS
+              ,COUNT(CASE WHEN ALL_SALE_ITEM_AMOUNT_KRW > 0 THEN 1 ELSE NULL END) AS DAYS_WITH_SALES
+          FROM DASH.{TAG}_PRICEANLAYSISITEMTIMESERIES
+         WHERE STATISTICS_DATE BETWEEN (SELECT FR_DT FROM WT_WHERE) AND (SELECT TO_DT FROM WT_WHERE)
+           AND SALE_TAG_ITEM_PRICE_KRW > 0
+           AND ITEM_NAME IS NOT NULL
+      GROUP BY ITEM_NAME
+        HAVING SUM(ALL_SALE_ITEM_AMOUNT_KRW) > 0
+        AND (COUNT(CASE WHEN ALL_SALE_ITEM_AMOUNT_KRW > 0 THEN 1 ELSE NULL END) * 1.0 / (((SELECT TO_DT FROM WT_WHERE) - (SELECT FR_DT FROM WT_WHERE)) + 1) > 0.6)
+
+    ), WT_SALE_RMB AS
+    (
+        SELECT ITEM_NAME
+              ,AVG(ALL_SALE_ITEM_AMOUNT_RMB / ALL_CHAN_SALES_AMOUNT_RMB * 100) AS AMT_RATE
+          FROM DASH.{TAG}_PRICEANLAYSISITEMTIMESERIES
+         WHERE STATISTICS_DATE BETWEEN (SELECT FR_DT FROM WT_WHERE) AND (SELECT TO_DT FROM WT_WHERE)
+           AND ALL_CHAN_SALES_AMOUNT_RMB > 0
+           AND ITEM_NAME IS NOT NULL
+      GROUP BY ITEM_NAME
+    ), WT_SALE_KRW AS
+    (
+        SELECT ITEM_NAME
+              ,AVG(ALL_SALE_ITEM_AMOUNT_KRW / ALL_CHAN_SALES_AMOUNT_KRW * 100) AS AMT_RATE
+          FROM DASH.{TAG}_PRICEANLAYSISITEMTIMESERIES
+         WHERE STATISTICS_DATE BETWEEN (SELECT FR_DT FROM WT_WHERE) AND (SELECT TO_DT FROM WT_WHERE)
+           AND ALL_CHAN_SALES_AMOUNT_KRW > 0
+           AND ITEM_NAME IS NOT NULL
+      GROUP BY ITEM_NAME
+    ), WT_DISC_RANK_RMB AS
+    (
+        SELECT ITEM_NAME
+              ,DISC_RATE
+              ,ROW_NUMBER() OVER(ORDER BY DISC_RATE DESC, ITEM_NAME) AS DISC_RANK
+          FROM WT_DISC_RMB
+    ), WT_DISC_RANK_KRW AS
+    (
+        SELECT ITEM_NAME
+              ,DISC_RATE
+              ,ROW_NUMBER() OVER(ORDER BY DISC_RATE DESC, ITEM_NAME) AS DISC_RANK
+          FROM WT_DISC_KRW
+    ), WT_JOIN_RMB AS
+    (
+        SELECT A.ITEM_NAME
+              ,A.DISC_RANK
+              ,A.DISC_RATE
+              ,B.AMT_RATE
+         FROM WT_DISC_RANK_RMB A LEFT OUTER JOIN WT_SALE_RMB B ON (A.ITEM_NAME = B.ITEM_NAME)
+        -- WHERE A.DISC_RANK <= 5
+    ), WT_JOIN_KRW AS
+    (
+        SELECT A.ITEM_NAME
+              ,A.DISC_RANK
+              ,A.DISC_RATE
+              ,B.AMT_RATE
+         FROM WT_DISC_RANK_KRW A LEFT OUTER JOIN WT_SALE_KRW B ON (A.ITEM_NAME = B.ITEM_NAME)
+        -- WHERE A.DISC_RANK <= 5
+    ), WT_BASE AS
+    (
+        SELECT COALESCE(B.DISC_RANK, C.DISC_RANK) AS DISC_RANK      /* 순위              */
+              ,B.ITEM_NAME                        AS ITEM_NAME_RMB  /* 제품명   - 위안화 */
+              ,B.DISC_RATE                        AS DISC_RATE_RMB  /* 할인율   - 위안화 */
+              ,B.AMT_RATE                         AS AMT_RATE_RMB   /* 매출비중 - 위안화 */
+              ,C.ITEM_NAME                        AS ITEM_NAME_KRW  /* 제품명   - 한화   */
+              ,C.DISC_RATE                        AS DISC_RATE_KRW  /* 할인율   - 한화   */
+              ,C.AMT_RATE                         AS AMT_RATE_KRW   /* 매출비중 - 한화   */
+         FROM WT_JOIN_RMB B FULL OUTER JOIN WT_JOIN_RMB C ON (B.DISC_RANK = C.DISC_RANK)
+    )
+    SELECT DISC_RANK                                                                                    /* 순위              */
+          ,ITEM_NAME_RMB                                                              AS ITEM_NAME_RMB  /* 제품명   - 위안화 */
+          ,TO_CHAR(CAST(DISC_RATE_RMB AS DECIMAL(20,2)), 'FM999,999,999,999,990.00%') AS DISC_RATE_RMB  /* 할인율   - 위안화 */
+          ,TO_CHAR(CAST(AMT_RATE_RMB  AS DECIMAL(20,2)), 'FM999,999,999,999,990.00%') AS AMT_RATE_RMB   /* 매출비중 - 위안화 */
+          ,ITEM_NAME_KRW                                                              AS ITEM_NAME_KRW  /* 제품명   - 한화   */
+          ,TO_CHAR(CAST(DISC_RATE_KRW AS DECIMAL(20,2)), 'FM999,999,999,999,990.00%') AS DISC_RATE_KRW  /* 할인율   - 한화   */
+          ,TO_CHAR(CAST(AMT_RATE_KRW  AS DECIMAL(20,2)), 'FM999,999,999,999,990.00%') AS AMT_RATE_KRW   /* 매출비중 - 한화   */
+      FROM WT_BASE
+  ORDER BY DISC_RANK
